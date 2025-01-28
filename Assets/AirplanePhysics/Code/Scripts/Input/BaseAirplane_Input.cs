@@ -18,6 +18,7 @@ namespace AirplanePhysics.AirplaneInputs
 
         [SerializeField] protected KeyCode k_BrakeKey = KeyCode.Space;
         protected float f_brake = 0.0f;
+
         #endregion
 
         #region PROPERTIES
@@ -30,18 +31,16 @@ namespace AirplanePhysics.AirplaneInputs
         #endregion
 
         #region UNITY BUILT-IN METHODS
-        void Start()
-        {
-
-        }
 
         void Update()
         {
             HandleInput();
         }
+
         #endregion
 
         #region CUSTOM METHODS
+
         protected virtual void HandleInput()
         {
             //Main Input Handling
@@ -54,10 +53,12 @@ namespace AirplanePhysics.AirplaneInputs
             f_brake = Input.GetKey(k_BrakeKey) ? 1.0f : 0.0f;
 
             //Flaps Handling
-            if (Input.GetKeyDown(KeyCode.F)){
+            if (Input.GetKeyDown(KeyCode.F))
+            {
                 i_flaps++;
             }
-            if (Input.GetKeyDown(KeyCode.G)) { 
+            if (Input.GetKeyDown(KeyCode.G))
+            {
                 i_flaps--;
             }
 
