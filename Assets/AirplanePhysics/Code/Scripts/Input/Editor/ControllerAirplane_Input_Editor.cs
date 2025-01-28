@@ -1,16 +1,46 @@
+using AirplanePhysics.AirplaneInputs;
+using UnityEditor;
 using UnityEngine;
 
-public class ControllerAirplane_Input_Editor : MonoBehaviour
+namespace AirplanePhysics.AirplaneInputs
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [CustomEditor(typeof(ControllerAirplane_input))]
+    public class ControllerAirplane_Input_Editor : Editor
     {
-        
-    }
+        #region VARIABLES
+        private ControllerAirplane_input targetInput;
+        #endregion
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        #region UNITY BUILT-IN METHODS
+        private void OnEnable()
+        {
+            targetInput = (ControllerAirplane_input)target;
+        }
+
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI(); //Adds the targets GUI base look
+
+            //Custom Editor
+
+            string DebugInfo = "";
+
+            DebugInfo += "Pitch: " + targetInput.Pitch + "\n";
+            DebugInfo += "Roll: " + targetInput.Roll + "\n";
+
+            DebugInfo += "Yaw: " + targetInput.Yaw + "\n";
+            DebugInfo += "Throttle: " + targetInput.Throttle + "\n";
+
+            DebugInfo += "Brake: " + targetInput.Brake + "\n";
+            DebugInfo += "Flaps: " + targetInput.Flaps + "\n";
+
+            EditorGUILayout.Space(); //GUILayout.Space(20);
+            EditorGUILayout.TextArea(DebugInfo, GUILayout.Height(100));
+
+            EditorGUILayout.Space();
+
+            Repaint();
+        }
+        #endregion
     }
 }

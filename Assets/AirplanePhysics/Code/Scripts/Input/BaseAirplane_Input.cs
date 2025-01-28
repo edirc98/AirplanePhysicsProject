@@ -42,7 +42,7 @@ namespace AirplanePhysics.AirplaneInputs
         #endregion
 
         #region CUSTOM METHODS
-        void HandleInput()
+        protected virtual void HandleInput()
         {
             //Main Input Handling
             f_pitch = Input.GetAxis("Vertical");
