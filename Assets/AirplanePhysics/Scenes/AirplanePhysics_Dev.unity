@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &16360779 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7819095913471665527, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+  m_PrefabInstance: {fileID: 9103217766581598512}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &261558852
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,6 +670,11 @@ Transform:
   - {fileID: 944624812}
   m_Father: {fileID: 590932412}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1697186321 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4194701656827327272, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+  m_PrefabInstance: {fileID: 9103217766581598512}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1810807749
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,6 +752,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 4.21
       objectReference: {fileID: 0}
+    - target: {fileID: 3978494396161937867, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: m_WheelDampingRate
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4807405653489020436, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: m_WheelDampingRate
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5275941356147924954, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -786,10 +804,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaseAirplane
       objectReference: {fileID: 0}
+    - target: {fileID: 6027731254545727077, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: m_WheelDampingRate
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 8583872240564172851, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: maxForce
       value: 2000
       objectReference: {fileID: 0}
+    - target: {fileID: 8583872240564172851, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: propeller
+      value: 
+      objectReference: {fileID: 9103217766581598515}
     - target: {fileID: 8583872240564172851, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: powerCurve.m_Curve.Array.data[0].inSlope
       value: 2
@@ -814,7 +840,8 @@ PrefabInstance:
       propertyPath: powerCurve.m_Curve.Array.data[1].tangentMode
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6709772953510482800, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -839,12 +866,39 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2504912937885945757, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1869491335}
+    - targetCorrespondingSourceObject: {fileID: 7000821456864666026, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9103217766581598515}
   m_SourcePrefab: {fileID: 100100000, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
 --- !u!1 &9103217766581598513 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5603619872123065496, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
   m_PrefabInstance: {fileID: 9103217766581598512}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9103217766581598514 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7000821456864666026, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+  m_PrefabInstance: {fileID: 9103217766581598512}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9103217766581598515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9103217766581598514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b6fa669322e6fd4783063557819c100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minRPMsToSwap: 300
+  minRPMsToTextureSwap: 1500
+  propellerObejct: {fileID: 1697186321}
+  propellerBlurredObject: {fileID: 16360779}
+  propellerBlurredMaterial: {fileID: 2100000, guid: 9cea40d06cf93bd458699611b469ee1f, type: 2}
+  propellerblur1: {fileID: 2800000, guid: 71828564728c39b42b05bd94a5190b6d, type: 3}
+  propellerblur2: {fileID: 2800000, guid: e566a20e48c66c74d8941d19bc4d22d7, type: 3}
 --- !u!114 &9103217766581598516
 MonoBehaviour:
   m_ObjectHideFlags: 0
