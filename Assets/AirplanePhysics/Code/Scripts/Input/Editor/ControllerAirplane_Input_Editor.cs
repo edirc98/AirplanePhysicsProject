@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace AirplanePhysics.AirplaneInputs
 {
-    [CustomEditor(typeof(ControllerAirplane_input))]
+    [CustomEditor(typeof(ControllerAirplane_Input))]
     public class ControllerAirplane_Input_Editor : Editor
     {
         #region VARIABLES
-        private ControllerAirplane_input targetInput;
+        private ControllerAirplane_Input targetInput;
         #endregion
 
         #region UNITY BUILT-IN METHODS
         private void OnEnable()
         {
-            targetInput = (ControllerAirplane_input)target;
+            targetInput = (ControllerAirplane_Input)target;
         }
 
         public override void OnInspectorGUI()
