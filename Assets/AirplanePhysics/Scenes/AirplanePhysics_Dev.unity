@@ -915,6 +915,10 @@ MonoBehaviour:
   k_BrakeKey: 32
   ThrottleSensitivity: 0.01
   RollSensitivity: 0.01
+  PitchSensitivity: 0.01
+  YawSensitivity: 0.01
+  MouseDeadZone: 60
+  screenCenter: {x: 0, y: 0}
 --- !u!82 &9103217766581598518
 AudioSource:
   m_ObjectHideFlags: 0

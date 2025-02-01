@@ -24,10 +24,15 @@ namespace AirplanePhysics.AirplaneInputs
         [Header("Input Sensitivity")]
         [Range(0, 1)] public float ThrottleSensitivity;
         [Range(0, 1)] public float RollSensitivity;
+        [Range(0, 1)] public float PitchSensitivity;
+        [Range(0, 1)] public float YawSensitivity;
+
+        [Tooltip("Mouse center dead zone in pixels")]
+        public float MouseDeadZone = 60.0f;
 
 
 
-        [SerializeField] private Vector2 screenCenter = new Vector2 (Screen.width / 2, Screen.height / 2);
+        [SerializeField] private Vector2 screenCenter;
         #endregion
 
         #region PROPERTIES
@@ -40,7 +45,10 @@ namespace AirplanePhysics.AirplaneInputs
         #endregion
 
         #region UNITY BUILT-IN METHODS
-
+        private void Awake()
+        {
+            screenCenter =  new Vector2(Screen.width / 2, Screen.height / 2);
+        }
         void FixedUpdate()
         {
             HandleInput();
@@ -57,42 +65,13 @@ namespace AirplanePhysics.AirplaneInputs
             HandleThrottle();
             //ROLL
             HandleRoll();
-
-            Vector2 mousePos = Input.mousePosition;
-            Vector2 mousePosCentered = new Vector2(mousePos.x -= screenCenter.x, mousePos.y -= screenCenter.y);
-
-            Vector2 MouseDirection = mousePosCentered - screenCenter;
-
-            Debug.Log("MousePos X,Y: " + MouseDirection.x + ", " + MouseDirection.y);
-            
-            //PITCH
-            HandlePitch();
-            //YAW
-            HandleYaw();
-            
-            
-
-
-            //Main Input Handling
-            //f_pitch = Input.GetAxis("Vertical");
-            //f_roll = Input.GetAxis("Horizontal");
-            //f_yaw = Input.GetAxis("Yaw");
-            //f_throttle = Input.GetAxis("Throttle");
-
-            //Brake Handling
-            f_brake = Input.GetKey(k_BrakeKey) ? 1.0f : 0.0f;
-
+            //PITCH && YAW
+            HandlePitchYaw();
             //Flaps Handling
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                i_flaps++;
-            }
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                i_flaps--;
-            }
-
-            i_flaps = Mathf.Clamp(i_flaps, 0, i_maxFlapsIncrements);
+            HandleFlaps();
+            //BrakeHandling
+            HandleBrake();
+            
         }
 
         
@@ -135,14 +114,67 @@ namespace AirplanePhysics.AirplaneInputs
             f_roll = Mathf.Clamp(f_roll,-1.0f,1.0f);
         }
 
-        protected virtual void HandleYaw()
+        protected virtual void HandlePitchYaw()
         {
+            Vector2 mousePos = Input.mousePosition;
+            Vector2 mousePosCentered = new Vector2(mousePos.x -= screenCenter.x, mousePos.y -= screenCenter.y);
+            Vector2 mouseDir = mousePosCentered - Vector2.zero;
+
+            //Debug.Log("MousePos X,Y: " + MouseDirection.x + ", " + MouseDirection.y);
+            //YAW
+            if (mouseDir.x > MouseDeadZone) //Bigger positive -> Going right
+            {
+                f_yaw += YawSensitivity; 
+            }
+            else if(mouseDir.x < -MouseDeadZone)//Smaller negative -> Goign Left
+            {
+                f_yaw -= YawSensitivity;
+            }
+            else { //Is in the dead zone, goes back to zero
+                if (f_yaw > 0.1f) f_yaw -= YawSensitivity;
+                else if(f_yaw < -0.1f) f_yaw += YawSensitivity;
+                else f_yaw = 0.0f;
+            }
+
+            //PITCH
+            if (mouseDir.y > MouseDeadZone) //Bigger positive -> Going right
+            {
+                f_pitch += PitchSensitivity;
+            }
+            else if (mouseDir.y < -MouseDeadZone)//Smaller negative -> Goign Left
+            {
+                f_pitch -= PitchSensitivity;
+            }
+            else
+            { //Is in the dead zone, goes back to zero
+                if (f_pitch > 0.1f) f_pitch -= PitchSensitivity;
+                else if (f_pitch < -0.1f) f_pitch += PitchSensitivity;
+                else f_pitch = 0.0f;
+            }
+
+            //Clamp Values
+            f_pitch = Mathf.Clamp(f_pitch, -1.0f, 1.0f);
+            f_yaw = Mathf.Clamp(f_yaw, -1.0f, 1.0f);
 
         }
 
-        protected virtual void HandlePitch()
+        protected virtual void HandleBrake()
         {
+            f_brake = Input.GetKey(k_BrakeKey) ? 1.0f : 0.0f;
+        }
 
+        protected virtual void HandleFlaps()
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                i_flaps++;
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                i_flaps--;
+            }
+
+            i_flaps = Mathf.Clamp(i_flaps, 0, i_maxFlapsIncrements);
         }
         #endregion
     }
