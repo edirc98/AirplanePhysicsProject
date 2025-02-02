@@ -732,6 +732,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 460561890941983202, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460561890941983202, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460561890941983202, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1743422345617954203, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_Radius
       value: 1.4
@@ -760,6 +772,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 4.21
       objectReference: {fileID: 0}
+    - target: {fileID: 3609991250889521887, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3609991250889521887, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.39
+      objectReference: {fileID: 0}
     - target: {fileID: 4136327053099434002, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.028278232
@@ -770,7 +790,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5275941356147924954, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.504
+      value: 1.555
       objectReference: {fileID: 0}
     - target: {fileID: 5275941356147924954, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_LocalPosition.z
@@ -807,6 +827,10 @@ PrefabInstance:
     - target: {fileID: 5603619872123065496, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_Name
       value: BaseAirplane
+      objectReference: {fileID: 0}
+    - target: {fileID: 7000821456864666026, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: m_Name
+      value: Properller_GRP
       objectReference: {fileID: 0}
     - target: {fileID: 7570869940818584430, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_LocalPosition.y
@@ -921,9 +945,9 @@ MonoBehaviour:
   i_maxFlapsIncrements: 2
   k_BrakeKey: 32
   ThrottleSensitivity: 0.01
-  RollSensitivity: 0.01
-  PitchSensitivity: 0.01
-  YawSensitivity: 0.01
+  RollSensitivity: 0.1
+  PitchSensitivity: 0.1
+  YawSensitivity: 0.1
   MouseDeadZone: 60
   screenCenter: {x: 0, y: 0}
 --- !u!82 &9103217766581598518
@@ -1064,7 +1088,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 9103217766581598516}
   centerOfGravity: {fileID: 360672629}
-  airplaneWeight: 700
+  airplaneWeight: 800
   characteristics: {fileID: 9103217766581598521}
   airplaneEngines:
   - {fileID: 1408560505}
@@ -1084,6 +1108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 205191a5063faf347a314c84954c867b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pitchForce: 2000
+  rollForce: 2000
+  yawForce: 2000
   forwardSpeed: 0
   maxSpeed: 60
   maxLiftForce: 5500
@@ -1124,6 +1151,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   dragFactor: 0.01
+  pitchAngle: 0
+  rollAngle: 0
+  yawAngle: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

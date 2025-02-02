@@ -1,3 +1,4 @@
+using AirplanePhysics.AirplaneInputs;
 using UnityEngine;
 
 namespace AirplanePhysics.Component
@@ -7,10 +8,14 @@ namespace AirplanePhysics.Component
 
         #region VARIABLES
         private Rigidbody _rb;
+        private BaseAirplane_Input _input;
         private float _startDrag;
         private float _startAngularDrag;
 
-        [Header("Characteristics")]
+        [Header("Control Properties")]
+        public float pitchForce = 1000.0f;
+        public float rollForce = 1000.0f;
+        public float yawForce = 1000.0f;
 
 
         [Header("Forward Speed")]
@@ -29,6 +34,13 @@ namespace AirplanePhysics.Component
         [Header("Drag Properties")]
         public float dragFactor = 0.01f;
 
+        [Header("Pitch")]
+        [SerializeField] private float pitchAngle;
+        [Header("Roll")]
+        [SerializeField] private float rollAngle;
+        [Header("Roll")]
+        [SerializeField] private float yawAngle;
+
         #endregion
 
 
@@ -37,10 +49,11 @@ namespace AirplanePhysics.Component
         #endregion
 
         #region CUSTOM METHODS
-        public void InitCharacteristics(Rigidbody currRB)
+        public void InitCharacteristics(Rigidbody currRB, BaseAirplane_Input currInput)
         {
             //Basic Initialization
             _rb = currRB;
+            _input = currInput;
             _startDrag = _rb.linearDamping;
             _startAngularDrag = _rb.angularDamping;
 
@@ -54,6 +67,12 @@ namespace AirplanePhysics.Component
                 ComputeForwardSpeed();
                 ComputeLift();
                 ComputeDrag();
+
+                //Picth, Roll and Yaw movement
+                HandlePitch();
+                HandleRoll();
+                HandleYaw();
+
                 HandleRBTransform();
             }
             
@@ -98,7 +117,33 @@ namespace AirplanePhysics.Component
             _rb.angularDamping = _startAngularDrag * forwardSpeed;
         }
 
+        private void HandlePitch()
+        {
+            Vector3 flatForward = new Vector3(transform.forward.x,0,transform.forward.z).normalized;
+            
+            pitchAngle = Vector3.Angle(transform.forward, flatForward);
 
+            //Compute torque based on pitch
+            Vector3 pitchTorque = -_input.Pitch * pitchForce * transform.right;
+
+            _rb.AddTorque(pitchTorque);
+
+        }
+        private void HandleRoll()
+        {
+            Vector3 flatRight = new Vector3(transform.right.x,0,transform.right.z).normalized;
+            rollAngle = Vector3.Angle(transform.right, flatRight);
+
+            //Compute torque based on roll
+            Vector3 rollTorque = -_input.Roll * rollForce * transform.forward;
+            _rb.AddTorque(rollTorque);
+        }
+
+        private void HandleYaw()
+        {
+            Vector3 yawTorque = _input.Yaw * yawForce * transform.up;
+            _rb.AddTorque(yawTorque);
+        }
         private void HandleRBTransform()
         {
             if(_rb.linearVelocity.magnitude > 1.0f)

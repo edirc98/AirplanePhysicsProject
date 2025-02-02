@@ -43,7 +43,7 @@ namespace AirplanePhysics
                 characteristics = GetComponent<Airplane_Characteristics>();
                 if (characteristics != null)
                 {
-                    characteristics.InitCharacteristics(_rb);
+                    characteristics.InitCharacteristics(_rb,input);
                 }
             }
 
