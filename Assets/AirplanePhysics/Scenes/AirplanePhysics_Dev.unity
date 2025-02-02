@@ -1033,7 +1033,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0.01
-  m_AngularDrag: 0.01
+  m_AngularDrag: 0.1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1086,9 +1086,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forwardSpeed: 0
   maxSpeed: 60
-  maxLiftForce: 7500
+  maxLiftForce: 5500
   liftForce: 0
   finalLiftForce: {x: 0, y: 0, z: 0}
+  angleOfAttack: 0
   liftCurve:
     serializedVersion: 2
     m_Curve:
@@ -1122,7 +1123,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  dragFactor: 0.005
+  dragFactor: 0.01
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

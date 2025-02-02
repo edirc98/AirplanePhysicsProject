@@ -23,6 +23,7 @@ namespace AirplanePhysics.Component
         public float maxLiftForce = 800.0f;
         [SerializeField] private float liftForce;
         [SerializeField] private Vector3 finalLiftForce;
+        [SerializeField] private float angleOfAttack;
         public AnimationCurve liftCurve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
 
         [Header("Drag Properties")]
@@ -53,6 +54,7 @@ namespace AirplanePhysics.Component
                 ComputeForwardSpeed();
                 ComputeLift();
                 ComputeDrag();
+                HandleRBTransform();
             }
             
         }
@@ -72,10 +74,16 @@ namespace AirplanePhysics.Component
 
         private void ComputeLift()
         {
+
+            //Compute angle of attack
+            angleOfAttack = Vector3.Dot(_rb.linearVelocity.normalized,transform.forward);
+            angleOfAttack *= angleOfAttack;
+
+            //Compute lift force
             Vector3 liftDirection = transform.up; new Vector3(0,1,0); //Always perpendicular to the wings
 
             liftForce = liftCurve.Evaluate(normalizedSpeed) * maxLiftForce;
-            finalLiftForce = liftDirection * liftForce;
+            finalLiftForce = liftDirection * liftForce * angleOfAttack;
            
 
             _rb.AddForce(finalLiftForce);
@@ -89,6 +97,23 @@ namespace AirplanePhysics.Component
             _rb.linearDamping = finalDragForce;
             _rb.angularDamping = _startAngularDrag * forwardSpeed;
         }
+
+
+        private void HandleRBTransform()
+        {
+            if(_rb.linearVelocity.magnitude > 1.0f)
+            {
+                //Update velocity for extra stability
+                Vector3 updatedVelocity = Vector3.Lerp(_rb.linearVelocity,transform.forward * forwardSpeed, forwardSpeed * angleOfAttack * Time.deltaTime);
+                _rb.linearVelocity = updatedVelocity;
+
+                //Update rotation
+                Quaternion updatedRotation = Quaternion.Slerp(_rb.rotation, Quaternion.LookRotation(_rb.linearVelocity.normalized,transform.up),Time.deltaTime);
+                _rb.MoveRotation(updatedRotation);
+
+            }
+        }
+
         #endregion
 
 
