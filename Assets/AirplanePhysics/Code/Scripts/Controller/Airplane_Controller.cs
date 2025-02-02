@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace AirplanePhysics
 {
+    [RequireComponent(typeof(Airplane_Characteristics))]
     public class Airplane_Controller : BaseRigidbody_Controller
     {
         #region VARIABLES
@@ -15,6 +16,7 @@ namespace AirplanePhysics
         [Header("Base Airplane Properties")]
         public Transform centerOfGravity;
         [Tooltip("Airplane weight in Kg")] public float airplaneWeight = 800.0f;
+        public Airplane_Characteristics characteristics;
 
         [Header("Engines")]
         public List<Airplane_Engine> airplaneEngines = new List<Airplane_Engine>();
@@ -35,7 +37,14 @@ namespace AirplanePhysics
                 if (centerOfGravity != null) 
                 {
                     _rb.centerOfMass = centerOfGravity.localPosition;
-                } 
+                }
+
+                //Airplane characteristics
+                characteristics = GetComponent<Airplane_Characteristics>();
+                if (characteristics != null)
+                {
+                    characteristics.InitCharacteristics(_rb);
+                }
             }
 
             //Wheels set up
@@ -45,7 +54,10 @@ namespace AirplanePhysics
                 {
                     wheel.InitWheel();
                 }
-            } 
+            }
+
+            
+            
 
         }
         #endregion
@@ -56,7 +68,7 @@ namespace AirplanePhysics
             if(input != null)
             {
                 HandleEngines();
-                HandleAerodynamics();
+                HandleCharacteristics();
                 HandleSteering();
                 HandleBrakes();
             }
@@ -73,9 +85,12 @@ namespace AirplanePhysics
                 }
             }
         }
-        private void HandleAerodynamics()
+        private void HandleCharacteristics()
         {
-
+            if (characteristics != null) 
+            { 
+                characteristics.UpdateCharacteristics();
+            } 
         }
         private void HandleSteering()
         {
