@@ -1,4 +1,5 @@
 using AirplanePhysics.AirplaneInputs;
+using Unity.Hierarchy;
 using UnityEngine;
 
 namespace AirplanePhysics.Component
@@ -16,20 +17,24 @@ namespace AirplanePhysics.Component
         public float pitchForce = 1000.0f;
         public float rollForce = 1000.0f;
         public float yawForce = 1000.0f;
+        public float LerpSpeed = 0.03f; 
 
 
-        [Header("Forward Speed")]
-        private Vector3 localVelocity;
-        public float forwardSpeed;
+        [Header("Speed Properties")]
         public float maxSpeed = 60.0f;
+        [SerializeField] private float forwardSpeed;
+        private Vector3 localVelocity;
+        
         private float normalizedSpeed;
 
         [Header("Lift Properties")]
         public float maxLiftForce = 800.0f;
+        public AnimationCurve liftCurve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
+
         [SerializeField] private float liftForce;
         [SerializeField] private Vector3 finalLiftForce;
         [SerializeField] private float angleOfAttack;
-        public AnimationCurve liftCurve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
+        
 
         [Header("Drag Properties")]
         public float dragFactor = 0.01f;
@@ -72,6 +77,7 @@ namespace AirplanePhysics.Component
                 HandlePitch();
                 HandleRoll();
                 HandleYaw();
+                HandleBanking();
 
                 HandleRBTransform();
             }
@@ -132,7 +138,7 @@ namespace AirplanePhysics.Component
         private void HandleRoll()
         {
             Vector3 flatRight = new Vector3(transform.right.x,0,transform.right.z).normalized;
-            rollAngle = Vector3.Angle(transform.right, flatRight);
+            rollAngle = Vector3.SignedAngle(transform.right, flatRight, transform.forward);
 
             //Compute torque based on roll
             Vector3 rollTorque = -_input.Roll * rollForce * transform.forward;
@@ -144,20 +150,32 @@ namespace AirplanePhysics.Component
             Vector3 yawTorque = _input.Yaw * yawForce * transform.up;
             _rb.AddTorque(yawTorque);
         }
+
+        private void HandleBanking()
+        {
+            float bankSide = Mathf.InverseLerp(-90.0f, 90.0f, rollAngle); //Bank side goes form 0 to 1
+            float bankAmount = Mathf.Lerp(-1.0f, 1.0f, bankSide); // Now goes from -1 to 1
+
+            Vector3 bankTorque = bankAmount * rollForce * transform.up;
+            _rb.AddTorque(bankTorque);
+        }
+
         private void HandleRBTransform()
         {
             if(_rb.linearVelocity.magnitude > 1.0f)
             {
                 //Update velocity for extra stability
-                Vector3 updatedVelocity = Vector3.Lerp(_rb.linearVelocity,transform.forward * forwardSpeed, forwardSpeed * angleOfAttack * Time.deltaTime);
+                Vector3 updatedVelocity = Vector3.Lerp(_rb.linearVelocity,transform.forward * forwardSpeed, forwardSpeed * angleOfAttack * Time.deltaTime * LerpSpeed);
                 _rb.linearVelocity = updatedVelocity;
 
                 //Update rotation
-                Quaternion updatedRotation = Quaternion.Slerp(_rb.rotation, Quaternion.LookRotation(_rb.linearVelocity.normalized,transform.up),Time.deltaTime);
+                Quaternion updatedRotation = Quaternion.Slerp(_rb.rotation, Quaternion.LookRotation(_rb.linearVelocity.normalized,transform.up),Time.deltaTime * LerpSpeed);
                 _rb.MoveRotation(updatedRotation);
 
             }
         }
+
+        
 
         #endregion
 

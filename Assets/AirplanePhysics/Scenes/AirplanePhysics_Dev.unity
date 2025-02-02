@@ -1056,8 +1056,8 @@ Rigidbody:
   m_GameObject: {fileID: 9103217766581598513}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0.01
-  m_AngularDrag: 0.1
+  m_Drag: 0.07
+  m_AngularDrag: 0.025
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1108,15 +1108,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 205191a5063faf347a314c84954c867b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pitchForce: 2000
-  rollForce: 2000
-  yawForce: 2000
-  forwardSpeed: 0
+  pitchForce: 1550
+  rollForce: 1550
+  yawForce: 1550
+  LerpSpeed: 0.3
   maxSpeed: 60
+  forwardSpeed: 0
   maxLiftForce: 5500
-  liftForce: 0
-  finalLiftForce: {x: 0, y: 0, z: 0}
-  angleOfAttack: 0
   liftCurve:
     serializedVersion: 2
     m_Curve:
@@ -1150,6 +1148,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  liftForce: 0
+  finalLiftForce: {x: 0, y: 0, z: 0}
+  angleOfAttack: 0
   dragFactor: 0.01
   pitchAngle: 0
   rollAngle: 0
