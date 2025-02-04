@@ -223,9 +223,30 @@ Transform:
   - {fileID: 261558853}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &599455824 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5982109415545985801, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+  m_PrefabInstance: {fileID: 9103217766581598512}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928dd2e750b29a74ebad9f372957124f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &702758721 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7735952888748075953, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+  m_PrefabInstance: {fileID: 9103217766581598512}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &807782539 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3419788478027869819, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+  m_PrefabInstance: {fileID: 9103217766581598512}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &807782540 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7857099513762979919, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
   m_PrefabInstance: {fileID: 9103217766581598512}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &944624811
@@ -522,7 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTarget: {fileID: 9103217766581598517}
-  followDistance: 10
+  followDistance: 6
   heightDistance: 2
   cameraSmoothSpeed: 0.5
   minHeightFromGround: 6
@@ -712,6 +733,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 590932412}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1552268031 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6622911538252948834, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+  m_PrefabInstance: {fileID: 9103217766581598512}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928dd2e750b29a74ebad9f372957124f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1557956392
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,6 +1003,10 @@ PrefabInstance:
       propertyPath: controlSurfaceTransform
       value: 
       objectReference: {fileID: 190390866}
+    - target: {fileID: 5271210114751466516, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: m_Name
+      value: RightFlap
+      objectReference: {fileID: 0}
     - target: {fileID: 5275941356147924954, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1015,10 +1051,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaseAirplane
       objectReference: {fileID: 0}
+    - target: {fileID: 5982109415545985801, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: smoothSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982109415545985801, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: rotationAxis.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982109415545985801, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: maxRotatioAngle
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982109415545985801, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: controlSurfaceTransform
+      value: 
+      objectReference: {fileID: 807782539}
     - target: {fileID: 6299084752705405211, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6622911538252948834, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: smoothSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622911538252948834, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: rotationAxis.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622911538252948834, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: maxRotatioAngle
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622911538252948834, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: controlSurfaceTransform
+      value: 
+      objectReference: {fileID: 807782540}
     - target: {fileID: 7000821456864666026, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_Name
       value: Properller_GRP
@@ -1258,8 +1326,8 @@ Rigidbody:
   m_GameObject: {fileID: 9103217766581598513}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
+  m_Drag: 0.1
+  m_AngularDrag: 0.025
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1290,7 +1358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 9103217766581598516}
   centerOfGravity: {fileID: 360672629}
-  airplaneWeight: 700
+  airplaneWeight: 600
   characteristics: {fileID: 9103217766581598521}
   airplaneEngines:
   - {fileID: 1408560505}
@@ -1303,6 +1371,8 @@ MonoBehaviour:
   - {fileID: 1270079546}
   - {fileID: 1806769388}
   - {fileID: 2099734856}
+  - {fileID: 1552268031}
+  - {fileID: 599455824}
 --- !u!114 &9103217766581598521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1315,10 +1385,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 205191a5063faf347a314c84954c867b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pitchForce: 1500
-  rollForce: 1500
-  yawForce: 1500
-  LerpSpeed: 0.5
   maxSpeed: 60
   forwardSpeed: 0
   maxLiftForce: 5000
@@ -1358,7 +1424,12 @@ MonoBehaviour:
   liftForce: 0
   finalLiftForce: {x: 0, y: 0, z: 0}
   angleOfAttack: 0
-  dragFactor: 0.005
+  dragFactor: 0.0005
+  flapsDrag: 0.0002
+  pitchForce: 1500
+  rollForce: 1500
+  yawForce: 1500
+  rbLerpSpeed: 0.03
   pitchAngle: 0
   rollAngle: 0
   yawAngle: 0

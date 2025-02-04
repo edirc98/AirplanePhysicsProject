@@ -1,6 +1,7 @@
 using AirplanePhysics.AirplaneInputs;
 using Unity.Hierarchy;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace AirplanePhysics.Component
 {
@@ -13,11 +14,7 @@ namespace AirplanePhysics.Component
         private float _startDrag;
         private float _startAngularDrag;
 
-        [Header("Control Properties")]
-        public float pitchForce = 1000.0f;
-        public float rollForce = 1000.0f;
-        public float yawForce = 1000.0f;
-        public float LerpSpeed = 0.03f; 
+        
 
 
         [Header("Speed Properties")]
@@ -39,6 +36,13 @@ namespace AirplanePhysics.Component
 
         [Header("Drag Properties")]
         public float dragFactor = 0.01f;
+        public float flapsDrag = 0.005f;
+
+        [Header("Control Properties")]
+        public float pitchForce = 1000.0f;
+        public float rollForce = 1000.0f;
+        public float yawForce = 1000.0f;
+        public float rbLerpSpeed = 0.03f;
 
         [Header("Pitch")]
         [SerializeField] private float pitchAngle;
@@ -119,7 +123,13 @@ namespace AirplanePhysics.Component
         private void ComputeDrag()
         {
             float dragSpeed = forwardSpeed * dragFactor;
-            float finalDragForce = _startDrag + dragSpeed;
+
+            //Add flaps drag
+
+            float addedflapsDrag =  _input.Flaps * flapsDrag;
+
+            //Combined Drag
+            float finalDragForce = _startDrag + dragSpeed + addedflapsDrag;
 
             _rb.linearDamping = finalDragForce;
             _rb.angularDamping = _startAngularDrag * forwardSpeed;
@@ -137,6 +147,7 @@ namespace AirplanePhysics.Component
             _rb.AddTorque(pitchTorque);
 
         }
+
         private void HandleRoll()
         {
             Vector3 flatRight = new Vector3(transform.right.x,0,transform.right.z).normalized;
@@ -167,11 +178,11 @@ namespace AirplanePhysics.Component
             if(_rb.linearVelocity.magnitude > 1.0f)
             {
                 //Update velocity for extra stability
-                Vector3 updatedVelocity = Vector3.Lerp(_rb.linearVelocity,transform.forward * forwardSpeed, forwardSpeed * angleOfAttack * Time.deltaTime * LerpSpeed);
+                Vector3 updatedVelocity = Vector3.Lerp(_rb.linearVelocity,transform.forward * forwardSpeed, forwardSpeed * angleOfAttack * Time.deltaTime * rbLerpSpeed);
                 _rb.linearVelocity = updatedVelocity;
 
                 //Update rotation
-                Quaternion updatedRotation = Quaternion.Slerp(_rb.rotation, Quaternion.LookRotation(_rb.linearVelocity.normalized,transform.up),Time.deltaTime * LerpSpeed);
+                Quaternion updatedRotation = Quaternion.Slerp(_rb.rotation, Quaternion.LookRotation(_rb.linearVelocity.normalized,transform.up),Time.deltaTime * rbLerpSpeed);
                 _rb.MoveRotation(updatedRotation);
 
             }
