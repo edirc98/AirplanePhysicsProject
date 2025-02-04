@@ -182,6 +182,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe05f5258631d9d44857e92c2c3fed82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wheelTransform: {fileID: 1961694530}
+  isBraking: 1
+  brakeForce: 100
+  isSteering: 0
+  steerAngle: 20
+  steerSmoothSpeed: 1
 --- !u!1 &590932411
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,6 +354,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe05f5258631d9d44857e92c2c3fed82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wheelTransform: {fileID: 1961694531}
+  isBraking: 1
+  brakeForce: 100
+  isSteering: 0
+  steerAngle: 20
+  steerSmoothSpeed: 1
 --- !u!114 &1270079546 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4484134073678502568, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
@@ -814,9 +826,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe05f5258631d9d44857e92c2c3fed82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wheelTransform: {fileID: 1961694532}
+  isBraking: 0
+  brakeForce: 5
+  isSteering: 1
+  steerAngle: 20
+  steerSmoothSpeed: 3
 --- !u!4 &1884131053 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 460561890941983202, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+  m_PrefabInstance: {fileID: 9103217766581598512}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1961694530 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8069407248608156430, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+  m_PrefabInstance: {fileID: 9103217766581598512}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1961694531 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5200830820457087719, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+  m_PrefabInstance: {fileID: 9103217766581598512}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1961694532 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6666023678854515026, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
   m_PrefabInstance: {fileID: 9103217766581598512}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &2099734856 stripped
@@ -996,7 +1029,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8583872240564172851, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: maxForce
-      value: 5000
+      value: 6500
       objectReference: {fileID: 0}
     - target: {fileID: 8583872240564172851, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: propeller
@@ -1225,8 +1258,8 @@ Rigidbody:
   m_GameObject: {fileID: 9103217766581598513}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0.07
-  m_AngularDrag: 0.025
+  m_Drag: 0
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1239,7 +1272,7 @@ Rigidbody:
   m_ImplicitCom: 0
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1282,13 +1315,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 205191a5063faf347a314c84954c867b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pitchForce: 1550
-  rollForce: 1550
-  yawForce: 1550
-  LerpSpeed: 0.3
+  pitchForce: 1500
+  rollForce: 1500
+  yawForce: 1500
+  LerpSpeed: 0.5
   maxSpeed: 60
   forwardSpeed: 0
-  maxLiftForce: 5500
+  maxLiftForce: 5000
   liftCurve:
     serializedVersion: 2
     m_Curve:
@@ -1325,7 +1358,7 @@ MonoBehaviour:
   liftForce: 0
   finalLiftForce: {x: 0, y: 0, z: 0}
   angleOfAttack: 0
-  dragFactor: 0.01
+  dragFactor: 0.005
   pitchAngle: 0
   rollAngle: 0
   yawAngle: 0

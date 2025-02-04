@@ -30,8 +30,13 @@ namespace AirplanePhysics.Component
 
             //Apply force
             float finalForce = throttleValue * maxForce;
-            Vector3 engineForce = transform.TransformDirection(transform.forward) * finalForce;
+            //Vector3 engineForce = transform.TransformDirection(transform.forward) * finalForce;
+
+            Vector3 engineForce = transform.forward * finalForce;
+
             return engineForce;
+
+            
         }
         #endregion
 

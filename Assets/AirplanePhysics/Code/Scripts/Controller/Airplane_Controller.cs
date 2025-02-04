@@ -74,8 +74,7 @@ namespace AirplanePhysics
                 HandleEngines();
                 HandleCharacteristics();
                 HandleControlSurfaces();
-                HandleSteering();
-                HandleBrakes();
+                HandleWheels();
             }
         }
 
@@ -97,13 +96,16 @@ namespace AirplanePhysics
                 characteristics.UpdateCharacteristics();
             } 
         }
-        private void HandleSteering()
+        
+        private void HandleWheels()
         {
-
-        }
-        private void HandleBrakes()
-        {
-
+            if(airplane_Wheels.Count > 0)
+            {
+                foreach(Airplane_Wheel wheel in airplane_Wheels)
+                {
+                    wheel.HandleWheel(input);
+                } 
+            }
         }
 
         private void HandleControlSurfaces()

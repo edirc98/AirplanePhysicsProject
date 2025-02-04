@@ -24,6 +24,7 @@ namespace AirplanePhysics.Component
         public float maxSpeed = 60.0f;
         [SerializeField] private float forwardSpeed;
         private Vector3 localVelocity;
+        private Vector3 localZVelocity;
         
         private float normalizedSpeed;
 
@@ -88,6 +89,7 @@ namespace AirplanePhysics.Component
         private void ComputeForwardSpeed() 
         {
             localVelocity = transform.InverseTransformDirection(_rb.linearVelocity);
+            localZVelocity = new Vector3(0,0,localVelocity.z);
 
             forwardSpeed = Mathf.Max(0/0f,localVelocity.z);
             forwardSpeed = Mathf.Clamp(forwardSpeed, 0f, maxSpeed);
@@ -182,9 +184,8 @@ namespace AirplanePhysics.Component
 
         private void OnDrawGizmos()
         {
-            Debug.DrawRay(transform.position,localVelocity, Color.blue);
+            Debug.DrawRay(transform.position,localZVelocity, Color.blue);
             Debug.DrawRay(transform.localPosition, finalLiftForce, Color.green);
-
         }
     }
 }
