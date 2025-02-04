@@ -1,5 +1,6 @@
 using AirplanePhysics.AirplaneInputs;
 using AirplanePhysics.Component;
+using IndiePixel.UI;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,9 @@ namespace AirplanePhysics
 
         [Header("Wheels")]
         public List<Airplane_Wheel> airplane_Wheels = new List<Airplane_Wheel>();
+
+        [Header("Control Surfaces")]
+        public List<Airplane_ControlSurface> controlSurfaces = new List<Airplane_ControlSurface>();
         #endregion
 
         #region UNITY BUILT-IN METHODS
@@ -69,6 +73,7 @@ namespace AirplanePhysics
             {
                 HandleEngines();
                 HandleCharacteristics();
+                HandleControlSurfaces();
                 HandleSteering();
                 HandleBrakes();
             }
@@ -99,6 +104,17 @@ namespace AirplanePhysics
         private void HandleBrakes()
         {
 
+        }
+
+        private void HandleControlSurfaces()
+        {
+            if (controlSurfaces.Count > 0)
+            {
+                foreach(Airplane_ControlSurface controlSurface in controlSurfaces)
+                {
+                    controlSurface.HandleControlSurface(input);
+                }
+            }
         }
 
         #endregion
