@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 944624813}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -350,6 +350,7 @@ GameObject:
   - component: {fileID: 1328639209}
   - component: {fileID: 1328639208}
   - component: {fileID: 1328639211}
+  - component: {fileID: 1328639212}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -424,8 +425,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328639207}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12061162, y: 0.81810874, z: -0.18595393, w: 0.53063375}
-  m_LocalPosition: {x: -15.472143, y: 12.307445, z: 16.587366}
+  m_LocalRotation: {x: -0.11973035, y: -0.3626823, z: 0.04704871, w: -0.92299116}
+  m_LocalPosition: {x: -13.445011, y: 9.084503, z: -13.516013}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -475,6 +476,23 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1328639212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328639207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d112fa012665b7243aa0f5a61a3ec40a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followTarget: {fileID: 9103217766581598517}
+  followDistance: 10
+  heightDistance: 2
+  cameraSmoothSpeed: 0.5
+  minHeightFromGround: 6
 --- !u!1 &1360295332
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,6 +968,11 @@ MonoBehaviour:
   YawSensitivity: 0.1
   MouseDeadZone: 60
   screenCenter: {x: 0, y: 0}
+--- !u!4 &9103217766581598517 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5275941356147924954, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+  m_PrefabInstance: {fileID: 9103217766581598512}
+  m_PrefabAsset: {fileID: 0}
 --- !u!82 &9103217766581598518
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1088,7 +1111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 9103217766581598516}
   centerOfGravity: {fileID: 360672629}
-  airplaneWeight: 800
+  airplaneWeight: 700
   characteristics: {fileID: 9103217766581598521}
   airplaneEngines:
   - {fileID: 1408560505}
