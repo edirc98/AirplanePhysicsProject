@@ -1143,6 +1143,9 @@ PrefabInstance:
       addedObject: {fileID: 9103217766581598521}
     - targetCorrespondingSourceObject: {fileID: 5603619872123065496, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 9103217766581598522}
+    - targetCorrespondingSourceObject: {fileID: 5603619872123065496, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 9103217766581598519}
     - targetCorrespondingSourceObject: {fileID: 5603619872123065496, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       insertIndex: -1
@@ -1385,7 +1388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 205191a5063faf347a314c84954c867b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 60
+  maxSpeed: 70
   forwardSpeed: 0
   maxLiftForce: 5000
   liftCurve:
@@ -1433,6 +1436,21 @@ MonoBehaviour:
   pitchAngle: 0
   rollAngle: 0
   yawAngle: 0
+--- !u!114 &9103217766581598522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9103217766581598513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ef1d38092829b74e92d1cf20fc65e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxGroundDistance: 3
+  liftForce: 1000
+  maxSpeedForGroundEffect: 20
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
