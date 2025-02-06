@@ -40,7 +40,7 @@ namespace AirplanePhysics.Tools {
                 //Create First Engine
                 GameObject EngineGO = new GameObject("Engine", typeof(Airplane_Engine));
                 Airplane_Engine engine = EngineGO.GetComponent<Airplane_Engine>();
-                controller.airplaneEngines.Add(engine);
+                controller.airplane_Engines.Add(engine);
                 EngineGO.transform.SetParent(rootGO.transform, false);
 
                 //Create Base Airplane with AssetDatabase

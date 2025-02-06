@@ -20,13 +20,13 @@ namespace AirplanePhysics
         public Airplane_Characteristics characteristics;
 
         [Header("Engines")]
-        public List<Airplane_Engine> airplaneEngines = new List<Airplane_Engine>();
+        public List<Airplane_Engine> airplane_Engines = new List<Airplane_Engine>();
 
         [Header("Wheels")]
         public List<Airplane_Wheel> airplane_Wheels = new List<Airplane_Wheel>();
 
         [Header("Control Surfaces")]
-        public List<Airplane_ControlSurface> controlSurfaces = new List<Airplane_ControlSurface>();
+        public List<Airplane_ControlSurface> airplane_controlSurfaces = new List<Airplane_ControlSurface>();
         #endregion
 
         #region UNITY BUILT-IN METHODS
@@ -80,9 +80,9 @@ namespace AirplanePhysics
 
         private void HandleEngines()
         {
-            if(airplaneEngines != null && airplaneEngines.Count > 0)
+            if(airplane_Engines != null && airplane_Engines.Count > 0)
             {
-                foreach (Airplane_Engine engine in airplaneEngines)
+                foreach (Airplane_Engine engine in airplane_Engines)
                 {
                     //Engine force computation
                     _rb.AddForce( engine.ComputeForce(input.Throttle));
@@ -110,9 +110,9 @@ namespace AirplanePhysics
 
         private void HandleControlSurfaces()
         {
-            if (controlSurfaces.Count > 0)
+            if (airplane_controlSurfaces.Count > 0)
             {
-                foreach(Airplane_ControlSurface controlSurface in controlSurfaces)
+                foreach(Airplane_ControlSurface controlSurface in airplane_controlSurfaces)
                 {
                     controlSurface.HandleControlSurface(input);
                 }
