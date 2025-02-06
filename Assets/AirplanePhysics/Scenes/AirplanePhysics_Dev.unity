@@ -965,7 +965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2557970005412535020, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.14
+      value: 0.73
       objectReference: {fileID: 0}
     - target: {fileID: 2580373910850454961, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1143,13 +1143,13 @@ PrefabInstance:
       addedObject: {fileID: 9103217766581598521}
     - targetCorrespondingSourceObject: {fileID: 5603619872123065496, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9103217766581598522}
-    - targetCorrespondingSourceObject: {fileID: 5603619872123065496, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 9103217766581598519}
     - targetCorrespondingSourceObject: {fileID: 5603619872123065496, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9103217766581598518}
+    - targetCorrespondingSourceObject: {fileID: 5603619872123065496, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9103217766581598522}
     - targetCorrespondingSourceObject: {fileID: 5118466408664831821, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1215794459}
@@ -1359,23 +1359,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae4c22ea52eae65409a0d1cf5d3a30f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preset: {fileID: 11400000, guid: 55d112041ea912743bfe0fe86344f089, type: 2}
   input: {fileID: 9103217766581598516}
   centerOfGravity: {fileID: 360672629}
   airplaneWeight: 600
   characteristics: {fileID: 9103217766581598521}
-  airplaneEngines:
+  airplane_Engines:
   - {fileID: 1408560505}
   airplane_Wheels:
   - {fileID: 1215794459}
   - {fileID: 369392507}
   - {fileID: 1869491335}
-  controlSurfaces:
+  airplane_controlSurfaces:
   - {fileID: 1487023280}
   - {fileID: 1270079546}
   - {fileID: 1806769388}
   - {fileID: 2099734856}
   - {fileID: 1552268031}
   - {fileID: 599455824}
+  GroundEffectFeature: {fileID: 0}
 --- !u!114 &9103217766581598521
 MonoBehaviour:
   m_ObjectHideFlags: 0

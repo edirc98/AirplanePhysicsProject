@@ -53,7 +53,6 @@ namespace AirplanePhysics.Component
 
         #endregion
 
-
         #region CONSTANTS
         const float mpsToMph = 2.23694f;
         #endregion

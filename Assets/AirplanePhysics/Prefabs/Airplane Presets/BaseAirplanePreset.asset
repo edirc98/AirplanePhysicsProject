@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f57e094be503534f9d5419e3d6424d4, type: 3}
+  m_Name: BaseAirplanePreset
+  m_EditorClassIdentifier: 
+  AirplaneCenterOfGravityPosition: {x: 0, y: -0.67999995, z: 0.73}
+  AirplaneWeight: 600
+  AirplaneMaxSpeed: 70
+  AirplaneMaxLiftForce: 5000
+  AirplaneLiftCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.65078145
+      value: 0.97686714
+      inSlope: 0.19839168
+      outSlope: 0.19839168
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.13155046
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  AirplaneDragFactor: 0.0005
+  AirplaneFlapsDragFactor: 0.0002
+  AirplanePitchForce: 1500
+  AirplaneRollForce: 1500
+  AirplaneYawForce: 1500
+  AirplaneRigidBodyLerpSpeed: 0.03
+  GroundEffectMaxGroundDistance: 3
+  GroundEffectLiftForce: 1000
+  GroundEffectMaxSpeedForGroundEffect: 20

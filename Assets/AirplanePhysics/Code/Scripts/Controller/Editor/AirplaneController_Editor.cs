@@ -2,8 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Linq;
 using System.Collections.Generic;
-
-
+using AirplanePhysics.Feature;
 namespace AirplanePhysics.Component
 {
     [CustomEditor(typeof(Airplane_Controller))]
@@ -95,11 +94,32 @@ namespace AirplanePhysics.Component
                 string path = "Assets" + filePath.Substring(Application.dataPath.Length);
 
                 //Create new preset object
-                Airplane_Preset newPreset = (Airplane_Preset)CreateInstance(typeof(Airplane_Preset));//new Airplane_Preset();
-                newPreset.aiplane_Weight = targetController.airplaneWeight;
+                Airplane_Preset newPreset = CreateInstance<Airplane_Preset>();//new Airplane_Preset();
+                newPreset.AirplaneWeight = targetController.airplaneWeight;
                 if(targetController.centerOfGravity != null)
                 {
-                    newPreset.airplane_CoGPosition = targetController.centerOfGravity.position;
+                    newPreset.AirplaneCenterOfGravityPosition = targetController.centerOfGravity.localPosition;
+                }
+
+                if(targetController.characteristics != null)
+                {
+                    newPreset.AirplaneMaxSpeed = targetController.characteristics.maxSpeed; 
+                    newPreset.AirplaneMaxLiftForce = targetController.characteristics.maxLiftForce; 
+                    newPreset.AirplaneLiftCurve = targetController.characteristics.liftCurve; 
+                    newPreset.AirplaneDragFactor = targetController.characteristics.dragFactor; 
+                    newPreset.AirplaneFlapsDragFactor = targetController.characteristics.flapsDrag; 
+                    newPreset.AirplanePitchForce = targetController.characteristics.pitchForce; 
+                    newPreset.AirplaneRollForce = targetController.characteristics.rollForce; 
+                    newPreset.AirplaneYawForce = targetController.characteristics.yawForce; 
+                    newPreset.AirplaneRigidBodyLerpSpeed = targetController.characteristics.rbLerpSpeed; 
+                }
+
+                Airplane_GroundEffect groundEffectfeature = targetController.transform.GetComponent<Airplane_GroundEffect>();
+                if(groundEffectfeature != null)
+                {
+                    newPreset.GroundEffectMaxGroundDistance = groundEffectfeature.maxGroundDistance;
+                    newPreset.GroundEffectMaxSpeedForGroundEffect = groundEffectfeature.maxSpeedForGroundEffect;
+                    newPreset.GroundEffectLiftForce = groundEffectfeature.liftForce; 
                 }
 
                 //Create preset Asset

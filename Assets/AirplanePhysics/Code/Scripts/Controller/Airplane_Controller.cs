@@ -4,6 +4,7 @@ using IndiePixel.UI;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using AirplanePhysics.Feature;
 
 namespace AirplanePhysics
 {
@@ -11,6 +12,10 @@ namespace AirplanePhysics
     public class Airplane_Controller : BaseRigidbody_Controller
     {
         #region VARIABLES
+
+        [Header("Airplane Preset")]
+        public Airplane_Preset preset; 
+
         [Header("Airplane Input")]
         public BaseAirplane_Input input;
 
@@ -27,11 +32,24 @@ namespace AirplanePhysics
 
         [Header("Control Surfaces")]
         public List<Airplane_ControlSurface> airplane_controlSurfaces = new List<Airplane_ControlSurface>();
+
+        [Header("Features")]
+        public Airplane_GroundEffect GroundEffectFeature; 
         #endregion
 
         #region UNITY BUILT-IN METHODS
         public override void Start()
         {
+
+            try
+            {
+                GroundEffectFeature = GetComponent<Airplane_GroundEffect>();
+            }
+            catch(Exception e)
+            {
+                Debug.Log("No gorund effect feature found: " + e.Message);
+            }
+            GetPresetInfo();
             base.Start();
 
             //Apply mass to the RB
@@ -64,6 +82,8 @@ namespace AirplanePhysics
             
 
         }
+
+        
         #endregion
 
         #region CUSTOM METHODS
@@ -115,6 +135,36 @@ namespace AirplanePhysics
                 foreach(Airplane_ControlSurface controlSurface in airplane_controlSurfaces)
                 {
                     controlSurface.HandleControlSurface(input);
+                }
+            }
+        }
+
+
+
+        private void GetPresetInfo()
+        {
+            if(preset != null)
+            {
+                airplaneWeight = preset.AirplaneWeight;
+                centerOfGravity.localPosition = preset.AirplaneCenterOfGravityPosition;
+
+                if(characteristics != null)
+                {
+                    characteristics.maxSpeed = preset.AirplaneMaxSpeed;
+                    characteristics.maxLiftForce = preset.AirplaneMaxLiftForce; 
+                    characteristics.liftCurve = preset.AirplaneLiftCurve; 
+                    characteristics.dragFactor = preset.AirplaneDragFactor; 
+                    characteristics.flapsDrag = preset.AirplaneFlapsDragFactor; 
+                    characteristics.pitchForce = preset.AirplanePitchForce; 
+                    characteristics.rollForce = preset.AirplaneRollForce; 
+                    characteristics.yawForce = preset.AirplaneYawForce; 
+                    characteristics.rbLerpSpeed = preset.AirplaneRigidBodyLerpSpeed; 
+                }
+                if(GroundEffectFeature != null)
+                {
+                    GroundEffectFeature.maxGroundDistance = preset.GroundEffectMaxGroundDistance;
+                    GroundEffectFeature.liftForce = preset.GroundEffectLiftForce;
+                    GroundEffectFeature.maxSpeedForGroundEffect = preset.GroundEffectMaxSpeedForGroundEffect; 
                 }
             }
         }
