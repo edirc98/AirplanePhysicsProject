@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 4000010002800646}
   - component: {fileID: 95584782227239134}
   m_Layer: 0
-  m_Name: IndiePixel_Airplane
+  m_Name: Base_Airplane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
