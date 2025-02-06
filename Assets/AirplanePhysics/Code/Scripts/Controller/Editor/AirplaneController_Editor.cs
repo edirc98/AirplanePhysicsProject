@@ -26,7 +26,7 @@ namespace AirplanePhysics.Component
             base.OnInspectorGUI();
             GUILayout.Space(10.0f);
             
-            if(GUILayout.Button("Get Airplane Components", GUILayout.Height(25)))
+            if(GUILayout.Button("Get Airplane Components", GUILayout.Height(30.0f)))
             {
                 //Clear lists
                 targetController.airplane_Engines.Clear();
@@ -36,6 +36,13 @@ namespace AirplanePhysics.Component
                 targetController.airplane_Engines = FindAllEngines();
                 targetController.airplane_Wheels = FindAllWheels();
                 targetController.airplane_controlSurfaces = FindAllControlSurfaces();
+            }
+
+            GUILayout.Space(5.0f);
+            if(GUILayout.Button("Create Airplane Preset", GUILayout.Height(30.0f)))
+            {
+                string presetPath = EditorUtility.SaveFilePanel("Save Airplane Preset", "Assets", " New Airplane Preset", "asset");
+                SaveAirplanePreset(presetPath);
             }
 
             GUILayout.Space(10.0f);
@@ -56,8 +63,6 @@ namespace AirplanePhysics.Component
 
             return engines.ToList(); 
         }
-
-
         private List<Airplane_Wheel> FindAllWheels()
         {
             Airplane_Wheel[] wheels = new Airplane_Wheel[0];
@@ -69,7 +74,6 @@ namespace AirplanePhysics.Component
 
             return wheels.ToList();
         }
-
         private List<Airplane_ControlSurface> FindAllControlSurfaces()
         {
             Airplane_ControlSurface[] controlSurfaces = new Airplane_ControlSurface[0];
@@ -80,6 +84,27 @@ namespace AirplanePhysics.Component
             }
 
             return controlSurfaces.ToList();
+        }
+
+        private void SaveAirplanePreset(string filePath)
+        {
+            if(targetController != null && !string.IsNullOrEmpty(filePath))
+            {
+
+                //Substract All the C/Users to /Assets
+                string path = "Assets" + filePath.Substring(Application.dataPath.Length);
+
+                //Create new preset object
+                Airplane_Preset newPreset = (Airplane_Preset)CreateInstance(typeof(Airplane_Preset));//new Airplane_Preset();
+                newPreset.aiplane_Weight = targetController.airplaneWeight;
+                if(targetController.centerOfGravity != null)
+                {
+                    newPreset.airplane_CoGPosition = targetController.centerOfGravity.position;
+                }
+
+                //Create preset Asset
+                AssetDatabase.CreateAsset(newPreset, path);
+            }
         }
         #endregion
     }
