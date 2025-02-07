@@ -363,54 +363,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 944624811}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1103897017
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1103897018}
-  - component: {fileID: 1103897019}
-  m_Layer: 0
-  m_Name: CameraController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1103897018
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1103897017}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9103217766581598517}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1103897019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1103897017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b788fc4ddcc280449437a10942a9ce7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  input: {fileID: 9103217766581598516}
-  AirplaneCameras:
-  - {fileID: 1328639209}
-  - {fileID: 1431777494}
 --- !u!1 &1215794456 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5118466408664831821, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
@@ -737,11 +689,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a72c57445a06e2f44860c89898108478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!20 &1431777494 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 131609924975488024, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
-  m_PrefabInstance: {fileID: 9103217766581598512}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1487023278 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5126916385220277858, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
@@ -1160,6 +1107,14 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 00ce172d333d2944796d39e7e46b8be0, type: 3}
+    - target: {fileID: 4692184242189659254, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: input
+      value: 
+      objectReference: {fileID: 9103217766581598516}
+    - target: {fileID: 4692184242189659254, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: 'AirplaneCameras.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1328639209}
     - target: {fileID: 5271210114751466516, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_Name
       value: RightFlap
@@ -1286,10 +1241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 5275941356147924954, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1103897018}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5603619872123065496, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       insertIndex: -1
