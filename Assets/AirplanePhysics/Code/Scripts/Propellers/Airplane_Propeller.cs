@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using System.Collections.Generic;
 
 namespace AirplanePhysics.Component
 {
@@ -7,12 +8,13 @@ namespace AirplanePhysics.Component
     {
         #region VARIABLES
         [Header("Propeller Properties")]
+        public float minRPMs = 100.0f;
         public float minRPMsToSwap = 300.0f;
         public float minRPMsToTextureSwap = 1500.0f;
 
         [Header("Propeller Objects")]
         public GameObject propellerObejct;
-        public GameObject propellerBlurredObject;
+        public List<GameObject> propellerBlurredObjects;
 
         [Header("Propeller Material Propeties")]
         public Material propellerBlurredMaterial;
@@ -25,7 +27,8 @@ namespace AirplanePhysics.Component
         private void Start()
         {
             propellerObejct.SetActive(true);
-            propellerBlurredObject.SetActive(false);
+            SetActiveBlurredProps(false);
+            //propellerBlurredObject.SetActive(false);
             
         }
         #endregion
@@ -34,6 +37,7 @@ namespace AirplanePhysics.Component
         public void HandlePropeller(float currentRPM)
         {
             float degreesPerSec = ((currentRPM * 360) / 60) * Time.deltaTime;
+            degreesPerSec = Mathf.Clamp(degreesPerSec, 0.0f, minRPMs);
             transform.Rotate(Vector3.up, degreesPerSec);
 
             //Handle Propeller Material swapping
@@ -47,7 +51,8 @@ namespace AirplanePhysics.Component
         {
             if (currentRPM > minRPMsToSwap)
             {
-                propellerBlurredObject.SetActive(true);
+                SetActiveBlurredProps(true);
+                //propellerBlurredObject.SetActive(true);
                 propellerObejct.SetActive(false);
                 if (currentRPM > minRPMsToTextureSwap)
                 {
@@ -60,18 +65,28 @@ namespace AirplanePhysics.Component
             }
             else
             {
-                propellerBlurredObject.SetActive(false);
+                SetActiveBlurredProps(false);
+                //propellerBlurredObject.SetActive(false);
                 propellerObejct.SetActive(true);
             }
         }
 
         private bool CheckAsignedObjects()
         {
-            if(propellerObejct && propellerBlurredObject && propellerBlurredMaterial && propellerblur1 && propellerblur2)
+            if(propellerObejct && propellerBlurredObjects.Count > 0 && propellerBlurredMaterial && propellerblur1 && propellerblur2)
             {
                 return true;
             }
             else return false;
+        }
+
+
+        private void SetActiveBlurredProps(bool active)
+        {
+            foreach(GameObject prop in propellerBlurredObjects)
+            {
+                prop.SetActive(active);
+            }
         }
 
         #endregion
