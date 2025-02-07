@@ -20,6 +20,9 @@ namespace AirplanePhysics.AirplaneInputs
         [SerializeField] protected KeyCode k_BrakeKey = KeyCode.Space;
         protected float f_brake = 0.0f;
 
+        [SerializeField] protected KeyCode k_CameraSwitch = KeyCode.C;
+        protected bool b_cameraSwitch = false;
+
 
         [Header("Input Sensitivity")]
         [Range(0, 1)] public float ThrottleSensitivity;
@@ -42,6 +45,7 @@ namespace AirplanePhysics.AirplaneInputs
         public float Throttle { get { return f_throttle; } }
         public float Flaps { get { return i_flaps; } }
         public float Brake { get { return f_brake; } }
+        public bool CameraSwitch { get { return b_cameraSwitch; } }
         #endregion
 
         #region UNITY BUILT-IN METHODS
@@ -71,10 +75,12 @@ namespace AirplanePhysics.AirplaneInputs
             HandleFlaps();
             //BrakeHandling
             HandleBrake();
+            //Camera Swithc
+            HandleCameraSwitch();
             
         }
 
-        
+
 
         protected virtual void HandleThrottle()
         {
@@ -175,6 +181,11 @@ namespace AirplanePhysics.AirplaneInputs
             }
 
             i_flaps = Mathf.Clamp(i_flaps, 0, i_maxFlapsIncrements);
+        }
+
+        private void HandleCameraSwitch()
+        {
+            b_cameraSwitch = Input.GetKeyDown(k_CameraSwitch);
         }
         #endregion
     }

@@ -33,9 +33,11 @@ namespace AirplanePhysics.AirplaneInputs
 
             DebugInfo += "Brake: " + targetInput.Brake + "\n";
             DebugInfo += "Flaps: " + targetInput.Flaps + "\n";
+            DebugInfo += "Camera Switch: " + targetInput.CameraSwitch + "\n";
+
 
             EditorGUILayout.Space(); //GUILayout.Space(20);
-            EditorGUILayout.TextArea(DebugInfo, GUILayout.Height(100));
+            EditorGUILayout.TextArea(DebugInfo, GUILayout.Height(110));
 
             EditorGUILayout.Space();
 
