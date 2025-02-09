@@ -34,7 +34,16 @@ namespace AirplanePhysics
         public List<Airplane_ControlSurface> airplane_controlSurfaces = new List<Airplane_ControlSurface>();
 
         [Header("Features")]
-        public Airplane_GroundEffect GroundEffectFeature; 
+        public Airplane_GroundEffect GroundEffectFeature;
+
+        private float _currentMSL; // MEAN SEA LEVEL, Altitude from 0
+        private float _currentAGL; //ABOVE GROUND LEVEL, Altitude to closest surface
+
+        #endregion
+
+        #region PROPETIES
+        public float MSL { get { return _currentMSL; } }
+        public float AGL { get { return _currentAGL; } }
         #endregion
 
         #region UNITY BUILT-IN METHODS
@@ -77,10 +86,6 @@ namespace AirplanePhysics
                     wheel.InitWheel();
                 }
             }
-
-            
-            
-
         }
 
         
@@ -95,6 +100,7 @@ namespace AirplanePhysics
                 HandleCharacteristics();
                 HandleControlSurfaces();
                 HandleWheels();
+                HandleAltitude();
             }
         }
 
@@ -139,7 +145,16 @@ namespace AirplanePhysics
             }
         }
 
+        private void HandleAltitude()
+        {
+            _currentMSL = transform.position.y;
 
+            RaycastHit rayHit; 
+            if(Physics.Raycast(transform.position, Vector3.down, out rayHit))
+            {
+                _currentAGL = transform.position.y - rayHit.point.y;
+            }
+        }
 
         private void GetPresetInfo()
         {
