@@ -9,20 +9,21 @@ namespace AirplanePhysics.AirplaneInputs
         protected override void HandleInput()
         {
 
+            base.HandleInput();
 
-            //THROTTLE
-            HandleThrottle();
+            ////THROTTLE
+            //HandleThrottle();
 
-            //Main Input Handling
-            f_pitch = Input.GetAxis("Vertical");
-            f_roll = Input.GetAxis("Horizontal");
-            f_yaw = Input.GetAxis("Controlller_RHorizontal_Stick");
-            //f_throttle = Input.GetAxis("Controlller_RVertical_Stick");
+            ////Main Input Handling
+            //f_pitch = Input.GetAxis("Vertical");
+            //f_roll = Input.GetAxis("Horizontal");
+            //f_yaw = Input.GetAxis("Controlller_RHorizontal_Stick");
+            ////f_throttle = Input.GetAxis("Controlller_RVertical_Stick");
 
-            //Brake Handling
-            f_brake = Input.GetAxis("Fire1");
+            ////Brake Handling
+            //f_brake = Input.GetAxis("Fire1");
 
-            //Flaps Handling
+            ////Flaps Handling
             //if (Input.GetButtonDown("R_Bumper"))
             //{
             //    i_flaps++;
@@ -32,7 +33,7 @@ namespace AirplanePhysics.AirplaneInputs
             //    i_flaps--;
             //}
 
-            i_flaps = Mathf.Clamp(i_flaps, 0, i_maxFlapsIncrements);
+            //i_flaps = Mathf.Clamp(i_flaps, 0, i_maxFlapsIncrements);
         }
 
         protected override void HandleThrottle()
