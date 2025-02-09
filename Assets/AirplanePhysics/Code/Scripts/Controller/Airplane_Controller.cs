@@ -34,7 +34,7 @@ namespace AirplanePhysics
         public List<Airplane_ControlSurface> airplane_controlSurfaces = new List<Airplane_ControlSurface>();
 
         [Header("Features")]
-        public Airplane_GroundEffect GroundEffectFeature;
+        public Airplane_GroundEffect groundEffectFeature;
 
         private float _currentMSL; // MEAN SEA LEVEL, Altitude from 0
         private float _currentAGL; //ABOVE GROUND LEVEL, Altitude to closest surface
@@ -52,7 +52,7 @@ namespace AirplanePhysics
 
             try
             {
-                GroundEffectFeature = GetComponent<Airplane_GroundEffect>();
+                groundEffectFeature = GetComponent<Airplane_GroundEffect>();
             }
             catch(Exception e)
             {
@@ -175,11 +175,11 @@ namespace AirplanePhysics
                     characteristics.yawForce = preset.AirplaneYawForce; 
                     characteristics.rbLerpSpeed = preset.AirplaneRigidBodyLerpSpeed; 
                 }
-                if(GroundEffectFeature != null)
+                if(groundEffectFeature != null)
                 {
-                    GroundEffectFeature.maxGroundDistance = preset.GroundEffectMaxGroundDistance;
-                    GroundEffectFeature.liftForce = preset.GroundEffectLiftForce;
-                    GroundEffectFeature.maxSpeedForGroundEffect = preset.GroundEffectMaxSpeedForGroundEffect; 
+                    groundEffectFeature.maxGroundDistance = preset.GroundEffectMaxGroundDistance;
+                    groundEffectFeature.liftForce = preset.GroundEffectLiftForce;
+                    groundEffectFeature.maxSpeedForGroundEffect = preset.GroundEffectMaxSpeedForGroundEffect; 
                 }
             }
         }

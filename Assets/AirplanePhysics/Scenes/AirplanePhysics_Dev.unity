@@ -377,7 +377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5330188, g: 0.77235585, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1194,8 +1194,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 710248630}
   - {fileID: 1748831642}
+  - {fileID: 710248630}
   - {fileID: 943351204}
   m_Father: {fileID: 610819655}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1216,6 +1216,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4730ee5ede10b4340be048063611ec03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  airplaneController: {fileID: 9103217766581598520}
+  hundredsPointer: {fileID: 710248630}
+  thousendsPointer: {fileID: 1748831642}
 --- !u!222 &1655499791
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1290,8 +1293,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.30000305}
-  m_SizeDelta: {x: 20.7508, y: 73.6891}
+  m_AnchoredPosition: {x: 0, y: 0.30000305}
+  m_SizeDelta: {x: 24.4353, y: 86.7732}
   m_Pivot: {x: 0.5, y: 0.3}
 --- !u!114 &1748831643
 MonoBehaviour:
@@ -1306,7 +1309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2111,7 +2114,7 @@ MonoBehaviour:
   - {fileID: 2099734856}
   - {fileID: 1552268031}
   - {fileID: 599455824}
-  GroundEffectFeature: {fileID: 0}
+  groundEffectFeature: {fileID: 0}
 --- !u!114 &9103217766581598521
 MonoBehaviour:
   m_ObjectHideFlags: 0

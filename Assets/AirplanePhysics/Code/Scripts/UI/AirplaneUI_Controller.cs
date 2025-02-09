@@ -8,22 +8,21 @@ namespace AirplanePhysics.UI
     {
 
         #region VARIABLES
-        public List<IAirplaneUI> AirplaneInstruments = new List<IAirplaneUI>();
+        public List<IAirplaneUI> airplaneInstruments = new List<IAirplaneUI>();
         #endregion
 
         #region UNITY BUILT-IN METHODS
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            AirplaneInstruments = transform.GetComponentsInChildren<IAirplaneUI>().ToList();
+            airplaneInstruments = transform.GetComponentsInChildren<IAirplaneUI>().ToList();
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (AirplaneInstruments.Count > 0)
+            if (airplaneInstruments.Count > 0)
             {
-                foreach (IAirplaneUI instrument in AirplaneInstruments)
+                foreach (IAirplaneUI instrument in airplaneInstruments)
                 {
                     instrument.HandleAirplaneUI();
                 }
