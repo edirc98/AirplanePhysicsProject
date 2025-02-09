@@ -25,7 +25,6 @@ namespace AirplanePhysics.UI
         {
             if (airplaneController != null)
             {
-                Debug.Log("Updating Altimeter");
                 float currentAltitude = airplaneController.MSL;
                 //Compute Thousends from 0 to 10
                 float currentThousends = currentAltitude / 1000.0f;

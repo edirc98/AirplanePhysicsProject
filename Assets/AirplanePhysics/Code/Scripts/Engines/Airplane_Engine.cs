@@ -15,6 +15,13 @@ namespace AirplanePhysics.Component
 
         [Header("Propellers")]
         public Airplane_Propeller propeller;
+
+        private float _currentRPMs;
+        #endregion
+
+        #region PROPERTIES
+        public float RPMs { get { return _currentRPMs; } }
+
         #endregion
 
         #region CUSTOM METHODS
@@ -25,8 +32,8 @@ namespace AirplanePhysics.Component
             throttleValue = powerCurve.Evaluate(throttleValue);
 
             //RPMs compuitation && Propeller
-            float currentRPM = throttleValue * maxRPM;
-            if(propeller != null) { propeller.HandlePropeller(currentRPM); }
+            _currentRPMs = throttleValue * maxRPM;
+            if(propeller != null) { propeller.HandlePropeller(_currentRPMs); }
 
             //Apply force
             float finalForce = throttleValue * maxForce;
