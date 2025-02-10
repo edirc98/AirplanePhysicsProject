@@ -1,7 +1,9 @@
 using UnityEngine;
+using AirplanePhysics.Feature;
 
 namespace AirplanePhysics.Component
 {
+    [RequireComponent(typeof(Airplane_Fuel))]
     public class Airplane_Engine : MonoBehaviour
     {
 
@@ -17,11 +19,24 @@ namespace AirplanePhysics.Component
         public Airplane_Propeller propeller;
 
         private float _currentRPMs;
+
+        [SerializeField] private Airplane_Fuel _fuelTank;
         #endregion
 
         #region PROPERTIES
         public float RPMs { get { return _currentRPMs; } }
 
+        #endregion
+
+        #region UNITY BUILT-IN METHODS
+        private void Start()
+        {
+            if(_fuelTank == null)
+            {
+                _fuelTank = GetComponent<Airplane_Fuel>();
+                if (_fuelTank != null) _fuelTank.InitFuel();
+            }
+        }
         #endregion
 
         #region CUSTOM METHODS
@@ -35,6 +50,9 @@ namespace AirplanePhysics.Component
             _currentRPMs = throttleValue * maxRPM;
             if(propeller != null) { propeller.HandlePropeller(_currentRPMs); }
 
+            //Fuel Handling
+            HandleFuel(throttle);
+
             //Apply force
             float finalForce = throttleValue * maxForce;
             //Vector3 engineForce = transform.TransformDirection(transform.forward) * finalForce;
@@ -42,6 +60,23 @@ namespace AirplanePhysics.Component
             Vector3 engineForce = transform.forward * finalForce;
 
             return engineForce;
+
+            
+        }
+
+
+        private void HandleFuel(float throttle)
+        {
+            //Handle fuel
+            if (_fuelTank != null)
+            {
+                _fuelTank.UpdateFuelTank(throttle);
+
+                if (_fuelTank.CurrentFuel <= 0)
+                {
+                    //ENGINE SHUT OFF-> TODO
+                }
+            }
 
             
         }
