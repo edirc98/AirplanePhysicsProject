@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 
 namespace AirplanePhysics.Feature
@@ -11,6 +12,9 @@ namespace AirplanePhysics.Feature
         public float fuelCapacity = 100.0f; //In liters
         [Tooltip("Average fuel burn rate in liters per hour")]
         public float fuelBurnRate = 20.0f;  //Liters / hours
+
+        [Header("Events")]
+        public UnityEvent OnFullFuel = new UnityEvent();
 
         private float _currentFuel;
         private float _normalizedFuel;
@@ -36,6 +40,25 @@ namespace AirplanePhysics.Feature
             _normalizedFuel = _currentFuel / fuelCapacity; 
 
             Debug.Log("Consuming Fuel: " + currentBurnRate);
+        }
+
+        public void AddFuel(float fuelAmount)
+        {
+            _currentFuel += fuelAmount;
+            _currentFuel = Mathf.Clamp(_currentFuel, 0.0f, fuelCapacity);
+
+            if(_currentFuel >= fuelCapacity)
+            {
+                if(OnFullFuel != null)
+                {
+                    OnFullFuel.Invoke();
+                }
+            }
+        }
+
+        public void ResetFuel()
+        {
+            _currentFuel = fuelCapacity;
         }
         #endregion
     }
