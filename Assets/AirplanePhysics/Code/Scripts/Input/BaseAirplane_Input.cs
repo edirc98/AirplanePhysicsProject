@@ -43,7 +43,9 @@ namespace AirplanePhysics.AirplaneInputs
         public float Roll { get { return f_roll; } }
         public float Yaw { get { return f_yaw; } }
         public float Throttle { get { return f_throttle; } }
-        public float Flaps { get { return i_flaps; } }
+        public int Flaps { get { return i_flaps; } }
+        public float FlapsNormalized { get { return (i_flaps / (float)i_maxFlapsIncrements); } 
+        }
         public float Brake { get { return f_brake; } }
         public bool CameraSwitch { get { return b_cameraSwitch; } }
         #endregion

@@ -38,8 +38,6 @@ namespace AirplanePhysics.Feature
             _currentFuel = Mathf.Clamp(_currentFuel, 0.0f, fuelCapacity);
 
             _normalizedFuel = _currentFuel / fuelCapacity; 
-
-            Debug.Log("Consuming Fuel: " + currentBurnRate);
         }
 
         public void AddFuel(float fuelAmount)
