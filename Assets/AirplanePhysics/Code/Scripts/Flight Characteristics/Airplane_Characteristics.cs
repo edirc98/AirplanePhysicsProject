@@ -14,16 +14,15 @@ namespace AirplanePhysics.Component
         private float _startDrag;
         private float _startAngularDrag;
 
-        
-
-
+ 
         [Header("Speed Properties")]
-        public float maxSpeed = 60.0f;
+        public float maxSpeed = 80.0f;
         [SerializeField] private float forwardSpeed;
         private Vector3 localVelocity;
         private Vector3 localZVelocity;
         
         private float normalizedSpeed;
+        public float MPS { get { return forwardSpeed; } }
 
         [Header("Lift Properties")]
         public float maxLiftForce = 800.0f;
@@ -95,7 +94,7 @@ namespace AirplanePhysics.Component
             localZVelocity = new Vector3(0,0,localVelocity.z);
 
             forwardSpeed = Mathf.Max(0/0f,localVelocity.z);
-            forwardSpeed = Mathf.Clamp(forwardSpeed, 0f, maxSpeed);
+            //forwardSpeed = Mathf.Clamp(forwardSpeed, 0f, maxSpeed);
 
             normalizedSpeed = Mathf.InverseLerp(0.0f, maxSpeed, forwardSpeed);
 
