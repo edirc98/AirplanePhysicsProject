@@ -28,31 +28,13 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
             ""id"": ""79725fb6-8b7e-4dab-9ef6-eb5482ce3acf"",
             ""actions"": [
                 {
-                    ""name"": ""Pitch"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""2ffb7d96-f2eb-4e04-96da-7d3cfaf5380a"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Roll"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""c5e47905-5202-42d6-b65e-ad8e4199a900"",
-                    ""expectedControlType"": ""Axis"",
+                    ""expectedControlType"": ""Double"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Yaw"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""b3a47911-cd1a-42ed-95db-b791c05145f7"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Throttle"",
@@ -182,138 +164,6 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""1D Axis"",
-                    ""id"": ""6abb3229-a3d2-430d-b4a0-a5bb9da7707d"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Yaw"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""6be4279c-7fe6-4e60-8d0b-bbe7b366fc4a"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Airplane_Keyboard"",
-                    ""action"": ""Yaw"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""0b1b3bb9-d720-4025-84b9-56542c715477"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Airplane_Keyboard"",
-                    ""action"": ""Yaw"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""ceae0a24-51a9-4d00-ae55-8288e5dfe9d7"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Yaw"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""506c6f72-8fbc-488b-9321-3a9b0f0beb47"",
-                    ""path"": ""<Gamepad>/rightStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Yaw"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""268db39d-9aa3-42f8-9947-7c957256b509"",
-                    ""path"": ""<Gamepad>/rightStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Yaw"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""030684af-0a9b-4455-ae08-22d31d5a0c49"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pitch"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""ac85502e-343e-4ae1-832f-1bccb0c29922"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Airplane_Keyboard"",
-                    ""action"": ""Pitch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""95461112-6d16-44b4-8753-82935fcd2433"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Airplane_Keyboard"",
-                    ""action"": ""Pitch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""9e843e4d-6862-4c4b-8107-c09a2448eeda"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pitch"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""ace9ed58-5617-472a-8ca3-7e3e9f5b1043"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pitch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""e61126de-dbcb-4b57-873d-429f5f9be187"",
-                    ""path"": ""<Gamepad>/leftStick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pitch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""1D Axis"",
                     ""id"": ""88848584-2837-4f52-81cb-900db20b2748"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
@@ -324,7 +174,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""negative"",
+                    ""name"": ""Negative"",
                     ""id"": ""dc4441f9-e2de-4953-aaa3-cc4b7ef42ee9"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
@@ -335,7 +185,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""positive"",
+                    ""name"": ""Positive"",
                     ""id"": ""3594bac0-4c3e-477e-96bb-4ee8926c5ffe"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
@@ -452,9 +302,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
 }");
         // AirplaneControls
         m_AirplaneControls = asset.FindActionMap("AirplaneControls", throwIfNotFound: true);
-        m_AirplaneControls_Pitch = m_AirplaneControls.FindAction("Pitch", throwIfNotFound: true);
         m_AirplaneControls_Roll = m_AirplaneControls.FindAction("Roll", throwIfNotFound: true);
-        m_AirplaneControls_Yaw = m_AirplaneControls.FindAction("Yaw", throwIfNotFound: true);
         m_AirplaneControls_Throttle = m_AirplaneControls.FindAction("Throttle", throwIfNotFound: true);
         m_AirplaneControls_Brake = m_AirplaneControls.FindAction("Brake", throwIfNotFound: true);
         m_AirplaneControls_FlapsUP = m_AirplaneControls.FindAction("FlapsUP", throwIfNotFound: true);
@@ -525,9 +373,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
     // AirplaneControls
     private readonly InputActionMap m_AirplaneControls;
     private List<IAirplaneControlsActions> m_AirplaneControlsActionsCallbackInterfaces = new List<IAirplaneControlsActions>();
-    private readonly InputAction m_AirplaneControls_Pitch;
     private readonly InputAction m_AirplaneControls_Roll;
-    private readonly InputAction m_AirplaneControls_Yaw;
     private readonly InputAction m_AirplaneControls_Throttle;
     private readonly InputAction m_AirplaneControls_Brake;
     private readonly InputAction m_AirplaneControls_FlapsUP;
@@ -536,9 +382,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
     {
         private @AirplaneInputActions m_Wrapper;
         public AirplaneControlsActions(@AirplaneInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Pitch => m_Wrapper.m_AirplaneControls_Pitch;
         public InputAction @Roll => m_Wrapper.m_AirplaneControls_Roll;
-        public InputAction @Yaw => m_Wrapper.m_AirplaneControls_Yaw;
         public InputAction @Throttle => m_Wrapper.m_AirplaneControls_Throttle;
         public InputAction @Brake => m_Wrapper.m_AirplaneControls_Brake;
         public InputAction @FlapsUP => m_Wrapper.m_AirplaneControls_FlapsUP;
@@ -552,15 +396,9 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_AirplaneControlsActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_AirplaneControlsActionsCallbackInterfaces.Add(instance);
-            @Pitch.started += instance.OnPitch;
-            @Pitch.performed += instance.OnPitch;
-            @Pitch.canceled += instance.OnPitch;
             @Roll.started += instance.OnRoll;
             @Roll.performed += instance.OnRoll;
             @Roll.canceled += instance.OnRoll;
-            @Yaw.started += instance.OnYaw;
-            @Yaw.performed += instance.OnYaw;
-            @Yaw.canceled += instance.OnYaw;
             @Throttle.started += instance.OnThrottle;
             @Throttle.performed += instance.OnThrottle;
             @Throttle.canceled += instance.OnThrottle;
@@ -577,15 +415,9 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IAirplaneControlsActions instance)
         {
-            @Pitch.started -= instance.OnPitch;
-            @Pitch.performed -= instance.OnPitch;
-            @Pitch.canceled -= instance.OnPitch;
             @Roll.started -= instance.OnRoll;
             @Roll.performed -= instance.OnRoll;
             @Roll.canceled -= instance.OnRoll;
-            @Yaw.started -= instance.OnYaw;
-            @Yaw.performed -= instance.OnYaw;
-            @Yaw.canceled -= instance.OnYaw;
             @Throttle.started -= instance.OnThrottle;
             @Throttle.performed -= instance.OnThrottle;
             @Throttle.canceled -= instance.OnThrottle;
@@ -635,9 +467,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
     }
     public interface IAirplaneControlsActions
     {
-        void OnPitch(InputAction.CallbackContext context);
         void OnRoll(InputAction.CallbackContext context);
-        void OnYaw(InputAction.CallbackContext context);
         void OnThrottle(InputAction.CallbackContext context);
         void OnBrake(InputAction.CallbackContext context);
         void OnFlapsUP(InputAction.CallbackContext context);

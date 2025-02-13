@@ -4680,11 +4680,8 @@ MonoBehaviour:
   k_BrakeKey: 32
   k_CameraSwitch: 99
   ThrottleSensitivity: 0.01
-  RollSensitivity: 0.1
-  PitchSensitivity: 0.1
-  YawSensitivity: 0.1
-  MouseDeadZone: 60
-  screenCenter: {x: 0, y: 0}
+  RollSensitivity: 0.05
+  RollBackSensitivity: 0.1
 --- !u!4 &9103217766581598517 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5275941356147924954, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
@@ -4957,7 +4954,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5a79c4b094dc74d89f01b458ffa5e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

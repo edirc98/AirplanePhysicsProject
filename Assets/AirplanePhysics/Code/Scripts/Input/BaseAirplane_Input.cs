@@ -27,15 +27,13 @@ namespace AirplanePhysics.AirplaneInputs
         [Header("Input Sensitivity")]
         [Range(0, 1)] public float ThrottleSensitivity;
         [Range(0, 1)] public float RollSensitivity;
-        [Range(0, 1)] public float PitchSensitivity;
-        [Range(0, 1)] public float YawSensitivity;
+        [Range(0, 1)] public float RollBackSensitivity;
+        //[Range(0, 1)] public float PitchSensitivity;
+        //[Range(0, 1)] public float YawSensitivity;
 
-        [Tooltip("Mouse center dead zone in pixels")]
-        public float MouseDeadZone = 60.0f;
+        [Header("Input System Actions")]
+        private AirplaneInputActions airplaneActions;
 
-
-
-        [SerializeField] private Vector2 screenCenter;
         #endregion
 
         #region PROPERTIES
@@ -53,11 +51,18 @@ namespace AirplanePhysics.AirplaneInputs
         #region UNITY BUILT-IN METHODS
         private void Awake()
         {
-            screenCenter =  new Vector2(Screen.width / 2, Screen.height / 2);
+            airplaneActions = new AirplaneInputActions();
+            airplaneActions.AirplaneControls.Enable();
+            SubscribeInputEvents();
         }
         void FixedUpdate()
         {
             HandleInput();
+        }
+
+        private void OnDisable()
+        {
+            airplaneActions.AirplaneControls.Disable();
         }
 
         #endregion
@@ -100,25 +105,24 @@ namespace AirplanePhysics.AirplaneInputs
 
         protected virtual void HandleRoll()
         {
-            //THROTTLE
-            if (Input.GetKey(KeyCode.A))
+            //ROLL
+            float inputValue = airplaneActions.AirplaneControls.Roll.ReadValue<float>();
+            if (inputValue != 0f)
             {
-                f_roll -= RollSensitivity;
+                f_roll += RollSensitivity * inputValue;
             }
-            else if (Input.GetKey(KeyCode.D))
+            else 
             {
-                f_roll += RollSensitivity;
-            }
-            else
-            {
+                //Make roll come back to 0
                 if (f_roll != 0)
                 {
-                    if (f_roll > 0.1f) f_roll -= RollSensitivity;
-                    else if (f_roll < -0.1f) f_roll += RollSensitivity;
+                    if (f_roll > 0.1f) f_roll -= RollBackSensitivity;
+                    else if (f_roll < -0.1f) f_roll += RollBackSensitivity;
                     else f_roll = 0.0f;
 
                 }
             }
+
             f_roll = Mathf.Clamp(f_roll,-1.0f,1.0f);
         }
 
@@ -163,6 +167,13 @@ namespace AirplanePhysics.AirplaneInputs
         private void HandleCameraSwitch()
         {
             b_cameraSwitch = Input.GetKeyDown(k_CameraSwitch);
+        }
+
+
+        private void SubscribeInputEvents()
+        {
+            //Roll
+            //airplaneActions.AirplaneControls.Roll.performed += HandleRoll;
         }
         #endregion
     }
