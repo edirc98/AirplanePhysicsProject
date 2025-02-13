@@ -31,19 +31,19 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Roll"",
                     ""type"": ""Value"",
                     ""id"": ""c5e47905-5202-42d6-b65e-ad8e4199a900"",
-                    ""expectedControlType"": ""Double"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Throttle"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""b375e5ad-7fe3-44ae-9766-7a805a3c2ca3"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Brake"",
@@ -108,9 +108,9 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""negative"",
+                    ""name"": ""Positive"",
                     ""id"": ""bf00e9dd-7147-4b44-9a4a-764ecff0322f"",
-                    ""path"": ""<Keyboard>/downArrow"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Airplane_Keyboard"",
@@ -119,9 +119,9 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""positive"",
+                    ""name"": ""Negative"",
                     ""id"": ""950d8031-7673-4c5e-b2bc-76597df548bd"",
-                    ""path"": ""<Keyboard>/upArrow"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Airplane_Keyboard"",
@@ -141,9 +141,9 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""negative"",
+                    ""name"": ""Positive"",
                     ""id"": ""4d11e9ac-803c-42f9-a585-c8355936d6b9"",
-                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""path"": ""<Gamepad>/dpad/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -152,9 +152,9 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""positive"",
+                    ""name"": ""Negative"",
                     ""id"": ""ba09ac1a-d9c4-45fb-89d0-43889f08bdaa"",
-                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -231,7 +231,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2ff5daee-b746-4c51-ab93-88eeb4e39eef"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Airplane_Keyboard"",
@@ -242,7 +242,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ba3d1b76-5bdc-4471-8bdc-5634045c63ec"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -253,7 +253,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""57bbd782-664e-4768-ab0b-1bdf64423d5a"",
-                    ""path"": ""<Keyboard>/g"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Airplane_Keyboard"",
@@ -264,7 +264,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8da6c1ed-3154-4947-9cc6-74b110ac6c50"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

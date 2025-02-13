@@ -79,7 +79,7 @@ namespace AirplanePhysics.AirplaneInputs
             //PITCH && YAW
             HandlePitchYaw();
             //Flaps Handling
-            HandleFlaps();
+            //HandleFlaps();
             //BrakeHandling
             HandleBrake();
             //Camera Swithc
@@ -92,14 +92,12 @@ namespace AirplanePhysics.AirplaneInputs
         protected virtual void HandleThrottle()
         {
             //THROTTLE
-            if (Input.GetKey(KeyCode.W))
+            float inputValue = airplaneActions.AirplaneControls.Throttle.ReadValue<float>();
+            if (inputValue != 0f)
             {
-                f_throttle += ThrottleSensitivity;
+                f_throttle += ThrottleSensitivity * inputValue;
             }
-            else if (Input.GetKey(KeyCode.S))
-            {
-                f_throttle -= ThrottleSensitivity;
-            }
+
             f_throttle = Mathf.Clamp01(f_throttle);
         }
 
@@ -150,17 +148,14 @@ namespace AirplanePhysics.AirplaneInputs
             f_brake = Input.GetKey(k_BrakeKey) ? 1.0f : 0.0f;
         }
 
-        protected virtual void HandleFlaps()
+        protected virtual void HandleFlapsUp(InputAction.CallbackContext context)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                i_flaps++;
-            }
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                i_flaps--;
-            }
-
+            i_flaps++;
+            i_flaps = Mathf.Clamp(i_flaps, 0, i_maxFlapsIncrements);
+        }
+        protected virtual void HandleFlapsDown(InputAction.CallbackContext context)
+        {
+            i_flaps--;
             i_flaps = Mathf.Clamp(i_flaps, 0, i_maxFlapsIncrements);
         }
 
@@ -172,8 +167,9 @@ namespace AirplanePhysics.AirplaneInputs
 
         private void SubscribeInputEvents()
         {
-            //Roll
-            //airplaneActions.AirplaneControls.Roll.performed += HandleRoll;
+            //Flaps
+            airplaneActions.AirplaneControls.FlapsUP.performed += HandleFlapsUp;
+            airplaneActions.AirplaneControls.FlapsDOWN.performed += HandleFlapsDown;
         }
         #endregion
     }
