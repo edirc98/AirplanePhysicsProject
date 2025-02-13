@@ -42,6 +42,8 @@ namespace AirplanePhysics.Component
         public float rollForce = 1000.0f;
         public float yawForce = 1000.0f;
         public float rbLerpSpeed = 0.03f;
+        public AnimationCurve controlSurfaceEfficiency = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
+        private float csEfficiency;
 
         [Header("Pitch")]
         [SerializeField] private float pitchAngle;
@@ -77,6 +79,7 @@ namespace AirplanePhysics.Component
                 ComputeDrag();
 
                 //Picth, Roll and Yaw movement
+                HandleControlSurfaceEfficiency();
                 HandlePitch();
                 HandleRoll();
                 HandleYaw();
@@ -133,6 +136,12 @@ namespace AirplanePhysics.Component
             _rb.angularDamping = _startAngularDrag * forwardSpeed;
         }
 
+
+        private void HandleControlSurfaceEfficiency()
+        {
+            csEfficiency = controlSurfaceEfficiency.Evaluate(normalizedSpeed);
+        }
+
         private void HandlePitch()
         {
             Vector3 flatForward = new Vector3(transform.forward.x,0,transform.forward.z).normalized;
@@ -140,7 +149,7 @@ namespace AirplanePhysics.Component
             pitchAngle = Vector3.Angle(transform.forward, flatForward);
 
             //Compute torque based on pitch
-            Vector3 pitchTorque = -_input.Pitch * pitchForce * transform.right;
+            Vector3 pitchTorque = -_input.Pitch * pitchForce * transform.right * csEfficiency;
 
             _rb.AddTorque(pitchTorque);
 
@@ -152,13 +161,13 @@ namespace AirplanePhysics.Component
             rollAngle = Vector3.SignedAngle(transform.right, flatRight, transform.forward);
 
             //Compute torque based on roll
-            Vector3 rollTorque = -_input.Roll * rollForce * transform.forward;
+            Vector3 rollTorque = -_input.Roll * rollForce * transform.forward * csEfficiency;
             _rb.AddTorque(rollTorque);
         }
 
         private void HandleYaw()
         {
-            Vector3 yawTorque = _input.Yaw * yawForce * transform.up;
+            Vector3 yawTorque = _input.Yaw * yawForce * transform.up * csEfficiency;
             _rb.AddTorque(yawTorque);
         }
 
