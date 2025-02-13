@@ -78,13 +78,10 @@ namespace AirplanePhysics.AirplaneInputs
             HandleRoll();
             //PITCH && YAW
             HandlePitchYaw();
-            //Flaps Handling
-            //HandleFlaps();
             //BrakeHandling
             HandleBrake();
-            //Camera Swithc
-            //HandleCameraSwitch();
-            
+
+            //HandlePitchRoll();
         }
 
 
@@ -124,6 +121,20 @@ namespace AirplanePhysics.AirplaneInputs
             f_roll = Mathf.Clamp(f_roll,-1.0f,1.0f);
         }
 
+        //protected virtual void HandlePitchRoll()
+        //{
+        //    Vector2 stickInputValue = airplaneActions.AirplaneControls.PitchRoll.ReadValue<Vector2>();
+        //    Debug.Log(stickInputValue);
+
+        //    //Roll -> X
+        //    f_roll = stickInputValue.x;
+        //    //Pitch -> Y
+        //    f_pitch = -stickInputValue.y;
+
+        //    f_roll = Mathf.Clamp(f_roll, -1.0f, 1.0f);
+        //    f_pitch = Mathf.Clamp(f_pitch, -1.0f, 1.0f);
+        //}
+
         protected virtual void HandlePitchYaw()
         {
             Vector2 mousePos = Mouse.current.position.value;
@@ -145,7 +156,8 @@ namespace AirplanePhysics.AirplaneInputs
 
         protected virtual void HandleBrake()
         {
-            f_brake = Input.GetKey(k_BrakeKey) ? 1.0f : 0.0f;
+            float inputValue = airplaneActions.AirplaneControls.Brake.ReadValue<float>();
+            f_brake = inputValue;
         }
 
         protected virtual void HandleFlapsUp(InputAction.CallbackContext context)
@@ -153,6 +165,7 @@ namespace AirplanePhysics.AirplaneInputs
             i_flaps++;
             i_flaps = Mathf.Clamp(i_flaps, 0, i_maxFlapsIncrements);
         }
+
         protected virtual void HandleFlapsDown(InputAction.CallbackContext context)
         {
             i_flaps--;
