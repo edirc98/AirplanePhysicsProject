@@ -39,6 +39,7 @@ namespace AirplanePhysics
                 if (input.CameraSwitch)
                 {
                     SwitchCamera();
+                    input.CameraSwitch = false;
                 }
             }
         }

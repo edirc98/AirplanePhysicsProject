@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,7 +21,6 @@ namespace AirplanePhysics.AirplaneInputs
         [SerializeField] protected KeyCode k_BrakeKey = KeyCode.Space;
         protected float f_brake = 0.0f;
 
-        [SerializeField] protected KeyCode k_CameraSwitch = KeyCode.C;
         protected bool b_cameraSwitch = false;
 
 
@@ -45,7 +45,7 @@ namespace AirplanePhysics.AirplaneInputs
         public float FlapsNormalized { get { return (i_flaps / (float)i_maxFlapsIncrements); } 
         }
         public float Brake { get { return f_brake; } }
-        public bool CameraSwitch { get { return b_cameraSwitch; } }
+        public bool CameraSwitch { get { return b_cameraSwitch; } set { b_cameraSwitch = value; } }
         #endregion
 
         #region UNITY BUILT-IN METHODS
@@ -83,7 +83,7 @@ namespace AirplanePhysics.AirplaneInputs
             //BrakeHandling
             HandleBrake();
             //Camera Swithc
-            HandleCameraSwitch();
+            //HandleCameraSwitch();
             
         }
 
@@ -159,9 +159,9 @@ namespace AirplanePhysics.AirplaneInputs
             i_flaps = Mathf.Clamp(i_flaps, 0, i_maxFlapsIncrements);
         }
 
-        private void HandleCameraSwitch()
+        private void HandleCameraSwitch(InputAction.CallbackContext context)
         {
-            b_cameraSwitch = Input.GetKeyDown(k_CameraSwitch);
+            b_cameraSwitch = true;
         }
 
 
@@ -170,6 +170,10 @@ namespace AirplanePhysics.AirplaneInputs
             //Flaps
             airplaneActions.AirplaneControls.FlapsUP.performed += HandleFlapsUp;
             airplaneActions.AirplaneControls.FlapsDOWN.performed += HandleFlapsDown;
+
+            //Camera switch
+            airplaneActions.AirplaneControls.CameraSwitch.performed += HandleCameraSwitch;
+
         }
         #endregion
     }

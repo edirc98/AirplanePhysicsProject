@@ -71,6 +71,15 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CameraSwitch"",
+                    ""type"": ""Button"",
+                    ""id"": ""7f95e4f8-a148-485e-a1da-c621f1cb2405"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -271,6 +280,28 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""FlapsDOWN"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""49599b56-6009-4a9d-a2d1-9c1c7d168ea6"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Airplane_Keyboard"",
+                    ""action"": ""CameraSwitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0da7db5-3353-4837-a19d-9aa75425ae9b"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraSwitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -307,6 +338,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
         m_AirplaneControls_Brake = m_AirplaneControls.FindAction("Brake", throwIfNotFound: true);
         m_AirplaneControls_FlapsUP = m_AirplaneControls.FindAction("FlapsUP", throwIfNotFound: true);
         m_AirplaneControls_FlapsDOWN = m_AirplaneControls.FindAction("FlapsDOWN", throwIfNotFound: true);
+        m_AirplaneControls_CameraSwitch = m_AirplaneControls.FindAction("CameraSwitch", throwIfNotFound: true);
     }
 
     ~@AirplaneInputActions()
@@ -378,6 +410,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_AirplaneControls_Brake;
     private readonly InputAction m_AirplaneControls_FlapsUP;
     private readonly InputAction m_AirplaneControls_FlapsDOWN;
+    private readonly InputAction m_AirplaneControls_CameraSwitch;
     public struct AirplaneControlsActions
     {
         private @AirplaneInputActions m_Wrapper;
@@ -387,6 +420,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
         public InputAction @Brake => m_Wrapper.m_AirplaneControls_Brake;
         public InputAction @FlapsUP => m_Wrapper.m_AirplaneControls_FlapsUP;
         public InputAction @FlapsDOWN => m_Wrapper.m_AirplaneControls_FlapsDOWN;
+        public InputAction @CameraSwitch => m_Wrapper.m_AirplaneControls_CameraSwitch;
         public InputActionMap Get() { return m_Wrapper.m_AirplaneControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -411,6 +445,9 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
             @FlapsDOWN.started += instance.OnFlapsDOWN;
             @FlapsDOWN.performed += instance.OnFlapsDOWN;
             @FlapsDOWN.canceled += instance.OnFlapsDOWN;
+            @CameraSwitch.started += instance.OnCameraSwitch;
+            @CameraSwitch.performed += instance.OnCameraSwitch;
+            @CameraSwitch.canceled += instance.OnCameraSwitch;
         }
 
         private void UnregisterCallbacks(IAirplaneControlsActions instance)
@@ -430,6 +467,9 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
             @FlapsDOWN.started -= instance.OnFlapsDOWN;
             @FlapsDOWN.performed -= instance.OnFlapsDOWN;
             @FlapsDOWN.canceled -= instance.OnFlapsDOWN;
+            @CameraSwitch.started -= instance.OnCameraSwitch;
+            @CameraSwitch.performed -= instance.OnCameraSwitch;
+            @CameraSwitch.canceled -= instance.OnCameraSwitch;
         }
 
         public void RemoveCallbacks(IAirplaneControlsActions instance)
@@ -472,5 +512,6 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
         void OnBrake(InputAction.CallbackContext context);
         void OnFlapsUP(InputAction.CallbackContext context);
         void OnFlapsDOWN(InputAction.CallbackContext context);
+        void OnCameraSwitch(InputAction.CallbackContext context);
     }
 }
