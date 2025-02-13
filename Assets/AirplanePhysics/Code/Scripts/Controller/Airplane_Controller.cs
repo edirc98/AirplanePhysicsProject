@@ -1,6 +1,5 @@
 using AirplanePhysics.AirplaneInputs;
 using AirplanePhysics.Component;
-using IndiePixel.UI;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
