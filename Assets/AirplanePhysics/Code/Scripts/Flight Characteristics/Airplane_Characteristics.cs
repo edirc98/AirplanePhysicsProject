@@ -27,6 +27,7 @@ namespace AirplanePhysics.Component
         [Header("Lift Properties")]
         public float maxLiftForce = 800.0f;
         public AnimationCurve liftCurve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
+        public float flapsLiftForce = 100.0f; 
 
         [SerializeField] private float liftForce;
         [SerializeField] private Vector3 finalLiftForce;
@@ -96,11 +97,10 @@ namespace AirplanePhysics.Component
             localVelocity = transform.InverseTransformDirection(_rb.linearVelocity);
             localZVelocity = new Vector3(0,0,localVelocity.z);
 
-            forwardSpeed = Mathf.Max(0/0f,localVelocity.z);
-            //forwardSpeed = Mathf.Clamp(forwardSpeed, 0f, maxSpeed);
+            forwardSpeed = Mathf.Max(0.0f,localVelocity.z);
+            forwardSpeed = Mathf.Clamp(forwardSpeed, 0f, maxSpeed);
 
             normalizedSpeed = Mathf.InverseLerp(0.0f, maxSpeed, forwardSpeed);
-
 
         }
 
@@ -112,12 +112,14 @@ namespace AirplanePhysics.Component
             angleOfAttack *= angleOfAttack;
 
             //Compute lift force
-            Vector3 liftDirection = transform.up; new Vector3(0,1,0); //Always perpendicular to the wings
+            Vector3 liftDirection = transform.up; //new Vector3(0,1,0); //Always perpendicular to the wings
+
+            //Compute Flaps Lift
+            float finalFlapsLiftForce = flapsLiftForce * _input.FlapsNormalized;
 
             liftForce = liftCurve.Evaluate(normalizedSpeed) * maxLiftForce;
-            finalLiftForce = liftDirection * liftForce * angleOfAttack;
+            finalLiftForce = liftDirection * (flapsLiftForce + liftForce) * angleOfAttack;
            
-
             _rb.AddForce(finalLiftForce);
         }
 
