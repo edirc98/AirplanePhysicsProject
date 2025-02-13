@@ -129,7 +129,7 @@ public partial class @Test_InputActions: IInputActionCollection2, IDisposable
                     ""id"": ""faf23b3e-f6c1-4627-9626-c5e9e582ef7f"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone"",
                     ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": false,

@@ -124,41 +124,16 @@ namespace AirplanePhysics.AirplaneInputs
 
         protected virtual void HandlePitchYaw()
         {
-            Vector2 mousePos = Input.mousePosition;
-            Vector2 mousePosCentered = new Vector2(mousePos.x -= screenCenter.x, mousePos.y -= screenCenter.y);
-            Vector2 mouseDir = mousePosCentered - Vector2.zero;
+            Vector2 mousePos = Mouse.current.position.value;
 
-            //Debug.Log("MousePos X,Y: " + MouseDirection.x + ", " + MouseDirection.y);
-            //YAW
-            if (mouseDir.x > MouseDeadZone) //Bigger positive -> Going right
-            {
-                f_yaw += YawSensitivity; 
-            }
-            else if(mouseDir.x < -MouseDeadZone)//Smaller negative -> Goign Left
-            {
-                f_yaw -= YawSensitivity;
-            }
-            else { //Is in the dead zone, goes back to zero
-                if (f_yaw > 0.1f) f_yaw -= YawSensitivity;
-                else if(f_yaw < -0.1f) f_yaw += YawSensitivity;
-                else f_yaw = 0.0f;
-            }
+            float normalizedX = Mathf.InverseLerp(0, Screen.width, mousePos.x);
+            float scaledNormalizedX = Mathf.Lerp(-1.0f, 1.0f, normalizedX);
 
-            //PITCH
-            if (mouseDir.y > MouseDeadZone) //Bigger positive -> Going right
-            {
-                f_pitch += PitchSensitivity;
-            }
-            else if (mouseDir.y < -MouseDeadZone)//Smaller negative -> Goign Left
-            {
-                f_pitch -= PitchSensitivity;
-            }
-            else
-            { //Is in the dead zone, goes back to zero
-                if (f_pitch > 0.1f) f_pitch -= PitchSensitivity;
-                else if (f_pitch < -0.1f) f_pitch += PitchSensitivity;
-                else f_pitch = 0.0f;
-            }
+            float normalizedY = Mathf.InverseLerp(0, Screen.height, mousePos.y);
+            float scaledNormalizedY = Mathf.Lerp(-1.0f, 1.0f, normalizedY);
+
+            f_yaw = scaledNormalizedX;
+            f_pitch = scaledNormalizedY;
 
             //Clamp Values
             f_pitch = Mathf.Clamp(f_pitch, -1.0f, 1.0f);
