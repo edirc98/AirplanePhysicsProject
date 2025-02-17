@@ -44,6 +44,15 @@ public partial class @Test_InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MouseMovement"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""b9369a97-d304-4b67-bd43-da68be963ae5"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -134,6 +143,17 @@ public partial class @Test_InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd82db12-9f78-4dc1-a5fb-32b9339e04e2"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -145,6 +165,21 @@ public partial class @Test_InputActions: IInputActionCollection2, IDisposable
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<VirtualMouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Pointer>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -167,6 +202,7 @@ public partial class @Test_InputActions: IInputActionCollection2, IDisposable
         m_BaseActionMap = asset.FindActionMap("BaseActionMap", throwIfNotFound: true);
         m_BaseActionMap_Jump = m_BaseActionMap.FindAction("Jump", throwIfNotFound: true);
         m_BaseActionMap_Movement = m_BaseActionMap.FindAction("Movement", throwIfNotFound: true);
+        m_BaseActionMap_MouseMovement = m_BaseActionMap.FindAction("MouseMovement", throwIfNotFound: true);
     }
 
     ~@Test_InputActions()
@@ -235,12 +271,14 @@ public partial class @Test_InputActions: IInputActionCollection2, IDisposable
     private List<IBaseActionMapActions> m_BaseActionMapActionsCallbackInterfaces = new List<IBaseActionMapActions>();
     private readonly InputAction m_BaseActionMap_Jump;
     private readonly InputAction m_BaseActionMap_Movement;
+    private readonly InputAction m_BaseActionMap_MouseMovement;
     public struct BaseActionMapActions
     {
         private @Test_InputActions m_Wrapper;
         public BaseActionMapActions(@Test_InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_BaseActionMap_Jump;
         public InputAction @Movement => m_Wrapper.m_BaseActionMap_Movement;
+        public InputAction @MouseMovement => m_Wrapper.m_BaseActionMap_MouseMovement;
         public InputActionMap Get() { return m_Wrapper.m_BaseActionMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -256,6 +294,9 @@ public partial class @Test_InputActions: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @MouseMovement.started += instance.OnMouseMovement;
+            @MouseMovement.performed += instance.OnMouseMovement;
+            @MouseMovement.canceled += instance.OnMouseMovement;
         }
 
         private void UnregisterCallbacks(IBaseActionMapActions instance)
@@ -266,6 +307,9 @@ public partial class @Test_InputActions: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @MouseMovement.started -= instance.OnMouseMovement;
+            @MouseMovement.performed -= instance.OnMouseMovement;
+            @MouseMovement.canceled -= instance.OnMouseMovement;
         }
 
         public void RemoveCallbacks(IBaseActionMapActions instance)
@@ -305,5 +349,6 @@ public partial class @Test_InputActions: IInputActionCollection2, IDisposable
     {
         void OnJump(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
+        void OnMouseMovement(InputAction.CallbackContext context);
     }
 }
