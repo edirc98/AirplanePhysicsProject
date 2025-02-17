@@ -25,9 +25,9 @@
                 },
                 {
                     "name": "Brake",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "45f11c58-4093-47b1-af9f-08ac2caa5d28",
-                    "expectedControlType": "Analog",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -60,8 +60,8 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "PitchRoll",
-                    "type": "Value",
+                    "name": "PitchYaw",
+                    "type": "PassThrough",
                     "id": "7dcde984-cec9-421d-8b3d-c3fd602adb51",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -87,7 +87,7 @@
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Airplane_PS4",
+                    "groups": "Airplane_Gamepad",
                     "action": "Brake",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -142,7 +142,7 @@
                     "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Airplane_PS4",
+                    "groups": "Airplane_Gamepad",
                     "action": "Throttle",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -153,7 +153,7 @@
                     "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Airplane_PS4",
+                    "groups": "Airplane_Gamepad",
                     "action": "Throttle",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -175,7 +175,7 @@
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Airplane_PS4",
+                    "groups": "Airplane_Gamepad",
                     "action": "FlapsUP",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -197,7 +197,7 @@
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Airplane_PS4",
+                    "groups": "Airplane_Gamepad",
                     "action": "FlapsDOWN",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -219,7 +219,7 @@
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Airplane_PS4",
+                    "groups": "Airplane_Gamepad",
                     "action": "CameraSwitch",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -230,8 +230,19 @@
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Airplane_PS4",
-                    "action": "PitchRoll",
+                    "groups": "Airplane_Gamepad",
+                    "action": "PitchYaw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b12e6844-f88c-4cd9-997a-786e1454d594",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Airplane_Keyboard",
+                    "action": "PitchYaw",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -267,6 +278,17 @@
                     "action": "Roll",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "e787d4e5-e05e-4f3e-9f45-b2e181e1e024",
+                    "path": "<Gamepad>/rightStick/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Airplane_Gamepad",
+                    "action": "Roll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
@@ -284,11 +306,11 @@
             ]
         },
         {
-            "name": "Airplane_PS4",
-            "bindingGroup": "Airplane_PS4",
+            "name": "Airplane_Gamepad",
+            "bindingGroup": "Airplane_Gamepad",
             "devices": [
                 {
-                    "devicePath": "<DualShockGamepad>",
+                    "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
                 }

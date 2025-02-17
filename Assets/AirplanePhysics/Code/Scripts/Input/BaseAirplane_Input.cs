@@ -121,23 +121,15 @@ namespace AirplanePhysics.AirplaneInputs
             f_roll = Mathf.Clamp(f_roll,-1.0f,1.0f);
         }
 
-        //protected virtual void HandlePitchRoll()
-        //{
-        //    Vector2 stickInputValue = airplaneActions.AirplaneControls.PitchRoll.ReadValue<Vector2>();
-        //    Debug.Log(stickInputValue);
 
-        //    //Roll -> X
-        //    f_roll = stickInputValue.x;
-        //    //Pitch -> Y
-        //    f_pitch = -stickInputValue.y;
-
-        //    f_roll = Mathf.Clamp(f_roll, -1.0f, 1.0f);
-        //    f_pitch = Mathf.Clamp(f_pitch, -1.0f, 1.0f);
-        //}
 
         protected virtual void HandlePitchYaw()
         {
-            Vector2 mousePos = Mouse.current.position.value;
+            
+            //TODO -> Check what happens when gamepad is conected too
+            //if(airplaneActions.)
+            Vector2 mousePos = airplaneActions.AirplaneControls.PitchYaw.ReadValue<Vector2>();
+            //Vector2 mousePos = Mouse.current.position.value;
 
             float normalizedX = Mathf.InverseLerp(0, Screen.width, mousePos.x);
             float scaledNormalizedX = Mathf.Lerp(-1.0f, 1.0f, normalizedX);

@@ -32,7 +32,7 @@ public class InputSystemTest : MonoBehaviour
     private void FixedUpdate()
     {
         //GetMousePos();
-        GetMousePosFromInputSystem();
+        //GetMousePosFromInputSystem();
         //ContiniousMovement();
     }
     public void Movement(InputAction.CallbackContext context)
@@ -60,9 +60,9 @@ public class InputSystemTest : MonoBehaviour
         Debug.Log("Scaled Normalized Y: " + scaledNormalizedY);
 
     }
-    private void GetMousePosFromInputSystem()
+    public void GetMousePosFromInputSystem(InputAction.CallbackContext context)
     {
-        Vector2 pos = testActions.BaseActionMap.MouseMovement.ReadValue<Vector2>();
+        Vector2 pos = context.ReadValue<Vector2>();
         Debug.Log(pos); 
     }
 

@@ -47,9 +47,9 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Brake"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""45f11c58-4093-47b1-af9f-08ac2caa5d28"",
-                    ""expectedControlType"": ""Analog"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -82,8 +82,8 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""PitchRoll"",
-                    ""type"": ""Value"",
+                    ""name"": ""PitchYaw"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""7dcde984-cec9-421d-8b3d-c3fd602adb51"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -109,7 +109,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Airplane_PS4"",
+                    ""groups"": ""Airplane_Gamepad"",
                     ""action"": ""Brake"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -164,7 +164,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/dpad/up"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Airplane_PS4"",
+                    ""groups"": ""Airplane_Gamepad"",
                     ""action"": ""Throttle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -175,7 +175,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Airplane_PS4"",
+                    ""groups"": ""Airplane_Gamepad"",
                     ""action"": ""Throttle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -197,7 +197,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Airplane_PS4"",
+                    ""groups"": ""Airplane_Gamepad"",
                     ""action"": ""FlapsUP"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -219,7 +219,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Airplane_PS4"",
+                    ""groups"": ""Airplane_Gamepad"",
                     ""action"": ""FlapsDOWN"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -241,7 +241,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Airplane_PS4"",
+                    ""groups"": ""Airplane_Gamepad"",
                     ""action"": ""CameraSwitch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -252,8 +252,19 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Airplane_PS4"",
-                    ""action"": ""PitchRoll"",
+                    ""groups"": ""Airplane_Gamepad"",
+                    ""action"": ""PitchYaw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b12e6844-f88c-4cd9-997a-786e1454d594"",
+                    ""path"": ""<Pointer>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Airplane_Keyboard"",
+                    ""action"": ""PitchYaw"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -289,6 +300,17 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Roll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e787d4e5-e05e-4f3e-9f45-b2e181e1e024"",
+                    ""path"": ""<Gamepad>/rightStick/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Airplane_Gamepad"",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -306,11 +328,11 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Airplane_PS4"",
-            ""bindingGroup"": ""Airplane_PS4"",
+            ""name"": ""Airplane_Gamepad"",
+            ""bindingGroup"": ""Airplane_Gamepad"",
             ""devices"": [
                 {
-                    ""devicePath"": ""<DualShockGamepad>"",
+                    ""devicePath"": ""<Gamepad>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -326,7 +348,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
         m_AirplaneControls_FlapsUP = m_AirplaneControls.FindAction("FlapsUP", throwIfNotFound: true);
         m_AirplaneControls_FlapsDOWN = m_AirplaneControls.FindAction("FlapsDOWN", throwIfNotFound: true);
         m_AirplaneControls_CameraSwitch = m_AirplaneControls.FindAction("CameraSwitch", throwIfNotFound: true);
-        m_AirplaneControls_PitchRoll = m_AirplaneControls.FindAction("PitchRoll", throwIfNotFound: true);
+        m_AirplaneControls_PitchYaw = m_AirplaneControls.FindAction("PitchYaw", throwIfNotFound: true);
     }
 
     ~@AirplaneInputActions()
@@ -399,7 +421,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_AirplaneControls_FlapsUP;
     private readonly InputAction m_AirplaneControls_FlapsDOWN;
     private readonly InputAction m_AirplaneControls_CameraSwitch;
-    private readonly InputAction m_AirplaneControls_PitchRoll;
+    private readonly InputAction m_AirplaneControls_PitchYaw;
     public struct AirplaneControlsActions
     {
         private @AirplaneInputActions m_Wrapper;
@@ -410,7 +432,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
         public InputAction @FlapsUP => m_Wrapper.m_AirplaneControls_FlapsUP;
         public InputAction @FlapsDOWN => m_Wrapper.m_AirplaneControls_FlapsDOWN;
         public InputAction @CameraSwitch => m_Wrapper.m_AirplaneControls_CameraSwitch;
-        public InputAction @PitchRoll => m_Wrapper.m_AirplaneControls_PitchRoll;
+        public InputAction @PitchYaw => m_Wrapper.m_AirplaneControls_PitchYaw;
         public InputActionMap Get() { return m_Wrapper.m_AirplaneControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -438,9 +460,9 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
             @CameraSwitch.started += instance.OnCameraSwitch;
             @CameraSwitch.performed += instance.OnCameraSwitch;
             @CameraSwitch.canceled += instance.OnCameraSwitch;
-            @PitchRoll.started += instance.OnPitchRoll;
-            @PitchRoll.performed += instance.OnPitchRoll;
-            @PitchRoll.canceled += instance.OnPitchRoll;
+            @PitchYaw.started += instance.OnPitchYaw;
+            @PitchYaw.performed += instance.OnPitchYaw;
+            @PitchYaw.canceled += instance.OnPitchYaw;
         }
 
         private void UnregisterCallbacks(IAirplaneControlsActions instance)
@@ -463,9 +485,9 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
             @CameraSwitch.started -= instance.OnCameraSwitch;
             @CameraSwitch.performed -= instance.OnCameraSwitch;
             @CameraSwitch.canceled -= instance.OnCameraSwitch;
-            @PitchRoll.started -= instance.OnPitchRoll;
-            @PitchRoll.performed -= instance.OnPitchRoll;
-            @PitchRoll.canceled -= instance.OnPitchRoll;
+            @PitchYaw.started -= instance.OnPitchYaw;
+            @PitchYaw.performed -= instance.OnPitchYaw;
+            @PitchYaw.canceled -= instance.OnPitchYaw;
         }
 
         public void RemoveCallbacks(IAirplaneControlsActions instance)
@@ -492,13 +514,13 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_Airplane_KeyboardSchemeIndex];
         }
     }
-    private int m_Airplane_PS4SchemeIndex = -1;
-    public InputControlScheme Airplane_PS4Scheme
+    private int m_Airplane_GamepadSchemeIndex = -1;
+    public InputControlScheme Airplane_GamepadScheme
     {
         get
         {
-            if (m_Airplane_PS4SchemeIndex == -1) m_Airplane_PS4SchemeIndex = asset.FindControlSchemeIndex("Airplane_PS4");
-            return asset.controlSchemes[m_Airplane_PS4SchemeIndex];
+            if (m_Airplane_GamepadSchemeIndex == -1) m_Airplane_GamepadSchemeIndex = asset.FindControlSchemeIndex("Airplane_Gamepad");
+            return asset.controlSchemes[m_Airplane_GamepadSchemeIndex];
         }
     }
     public interface IAirplaneControlsActions
@@ -509,6 +531,6 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
         void OnFlapsUP(InputAction.CallbackContext context);
         void OnFlapsDOWN(InputAction.CallbackContext context);
         void OnCameraSwitch(InputAction.CallbackContext context);
-        void OnPitchRoll(InputAction.CallbackContext context);
+        void OnPitchYaw(InputAction.CallbackContext context);
     }
 }
