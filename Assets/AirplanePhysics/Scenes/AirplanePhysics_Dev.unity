@@ -4455,6 +4455,9 @@ PrefabInstance:
       addedObject: {fileID: 9103217766581598516}
     - targetCorrespondingSourceObject: {fileID: 5603619872123065496, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 9103217766581598524}
+    - targetCorrespondingSourceObject: {fileID: 5603619872123065496, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 9103217766581598520}
     - targetCorrespondingSourceObject: {fileID: 5603619872123065496, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       insertIndex: -1
@@ -4542,7 +4545,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   i_maxFlapsIncrements: 2
   k_BrakeKey: 32
-  k_CameraSwitch: 99
   ThrottleSensitivity: 0.01
   RollSensitivity: 0.05
   RollBackSensitivity: 0.1
@@ -4818,6 +4820,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5a79c4b094dc74d89f01b458ffa5e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9103217766581598524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9103217766581598513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: bb43aeffd187830419c45d5001116692, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fe041cae-c644-4265-b486-3eae53495c20
+    m_ActionName: 'AirplaneControls/Roll[/Keyboard/d,/Keyboard/a,/DualShock4GamepadHID/rightStick/x]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b375e5ad-7fe3-44ae-9766-7a805a3c2ca3
+    m_ActionName: 'AirplaneControls/Throttle[/Keyboard/w,/Keyboard/s,/DualShock4GamepadHID/dpad/up,/DualShock4GamepadHID/dpad/down]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 45f11c58-4093-47b1-af9f-08ac2caa5d28
+    m_ActionName: 'AirplaneControls/Brake[/Keyboard/space,/DualShock4GamepadHID/buttonWest]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 77d9e6ab-9160-4409-8bcd-03982ca9df48
+    m_ActionName: 'AirplaneControls/FlapsUP[/Keyboard/q,/DualShock4GamepadHID/leftShoulder]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 51667615-5b2c-4031-a46f-8ecd7b22ea45
+    m_ActionName: 'AirplaneControls/FlapsDOWN[/Keyboard/e,/DualShock4GamepadHID/rightShoulder]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7f95e4f8-a148-485e-a1da-c621f1cb2405
+    m_ActionName: 'AirplaneControls/CameraSwitch[/Keyboard/c,/DualShock4GamepadHID/buttonNorth]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7dcde984-cec9-421d-8b3d-c3fd602adb51
+    m_ActionName: 'AirplaneControls/PitchYaw[/DualShock4GamepadHID/leftStick,/Mouse/position]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cbe1b64b-5f8e-4e51-9904-277f2a01bb90
+    m_ActionName: 'AirplaneControls/PitchYawController[/DualShock4GamepadHID/leftStick]'
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Airplane_Keyboard
+  m_DefaultActionMap: AirplaneControls
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

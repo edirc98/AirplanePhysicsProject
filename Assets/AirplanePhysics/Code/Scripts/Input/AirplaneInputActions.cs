@@ -82,9 +82,18 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""PitchYaw"",
-                    ""type"": ""PassThrough"",
+                    ""name"": ""PitchYawMouse"",
+                    ""type"": ""Value"",
                     ""id"": ""7dcde984-cec9-421d-8b3d-c3fd602adb51"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PitchYawController"",
+                    ""type"": ""Value"",
+                    ""id"": ""cbe1b64b-5f8e-4e51-9904-277f2a01bb90"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -248,23 +257,12 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4aceaca8-9ff3-44b6-b22e-5eb93ce29c7a"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Airplane_Gamepad"",
-                    ""action"": ""PitchYaw"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""b12e6844-f88c-4cd9-997a-786e1454d594"",
-                    ""path"": ""<Pointer>/position"",
+                    ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Airplane_Keyboard"",
-                    ""action"": ""PitchYaw"",
+                    ""action"": ""PitchYawMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -311,6 +309,17 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Roll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aaec6d64-d22d-4807-9ae4-973f2b9f6a9f"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": ""InvertVector2(invertX=false)"",
+                    ""groups"": "";Airplane_Gamepad"",
+                    ""action"": ""PitchYawController"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -322,6 +331,11 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -348,7 +362,8 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
         m_AirplaneControls_FlapsUP = m_AirplaneControls.FindAction("FlapsUP", throwIfNotFound: true);
         m_AirplaneControls_FlapsDOWN = m_AirplaneControls.FindAction("FlapsDOWN", throwIfNotFound: true);
         m_AirplaneControls_CameraSwitch = m_AirplaneControls.FindAction("CameraSwitch", throwIfNotFound: true);
-        m_AirplaneControls_PitchYaw = m_AirplaneControls.FindAction("PitchYaw", throwIfNotFound: true);
+        m_AirplaneControls_PitchYawMouse = m_AirplaneControls.FindAction("PitchYawMouse", throwIfNotFound: true);
+        m_AirplaneControls_PitchYawController = m_AirplaneControls.FindAction("PitchYawController", throwIfNotFound: true);
     }
 
     ~@AirplaneInputActions()
@@ -421,7 +436,8 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_AirplaneControls_FlapsUP;
     private readonly InputAction m_AirplaneControls_FlapsDOWN;
     private readonly InputAction m_AirplaneControls_CameraSwitch;
-    private readonly InputAction m_AirplaneControls_PitchYaw;
+    private readonly InputAction m_AirplaneControls_PitchYawMouse;
+    private readonly InputAction m_AirplaneControls_PitchYawController;
     public struct AirplaneControlsActions
     {
         private @AirplaneInputActions m_Wrapper;
@@ -432,7 +448,8 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
         public InputAction @FlapsUP => m_Wrapper.m_AirplaneControls_FlapsUP;
         public InputAction @FlapsDOWN => m_Wrapper.m_AirplaneControls_FlapsDOWN;
         public InputAction @CameraSwitch => m_Wrapper.m_AirplaneControls_CameraSwitch;
-        public InputAction @PitchYaw => m_Wrapper.m_AirplaneControls_PitchYaw;
+        public InputAction @PitchYawMouse => m_Wrapper.m_AirplaneControls_PitchYawMouse;
+        public InputAction @PitchYawController => m_Wrapper.m_AirplaneControls_PitchYawController;
         public InputActionMap Get() { return m_Wrapper.m_AirplaneControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -460,9 +477,12 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
             @CameraSwitch.started += instance.OnCameraSwitch;
             @CameraSwitch.performed += instance.OnCameraSwitch;
             @CameraSwitch.canceled += instance.OnCameraSwitch;
-            @PitchYaw.started += instance.OnPitchYaw;
-            @PitchYaw.performed += instance.OnPitchYaw;
-            @PitchYaw.canceled += instance.OnPitchYaw;
+            @PitchYawMouse.started += instance.OnPitchYawMouse;
+            @PitchYawMouse.performed += instance.OnPitchYawMouse;
+            @PitchYawMouse.canceled += instance.OnPitchYawMouse;
+            @PitchYawController.started += instance.OnPitchYawController;
+            @PitchYawController.performed += instance.OnPitchYawController;
+            @PitchYawController.canceled += instance.OnPitchYawController;
         }
 
         private void UnregisterCallbacks(IAirplaneControlsActions instance)
@@ -485,9 +505,12 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
             @CameraSwitch.started -= instance.OnCameraSwitch;
             @CameraSwitch.performed -= instance.OnCameraSwitch;
             @CameraSwitch.canceled -= instance.OnCameraSwitch;
-            @PitchYaw.started -= instance.OnPitchYaw;
-            @PitchYaw.performed -= instance.OnPitchYaw;
-            @PitchYaw.canceled -= instance.OnPitchYaw;
+            @PitchYawMouse.started -= instance.OnPitchYawMouse;
+            @PitchYawMouse.performed -= instance.OnPitchYawMouse;
+            @PitchYawMouse.canceled -= instance.OnPitchYawMouse;
+            @PitchYawController.started -= instance.OnPitchYawController;
+            @PitchYawController.performed -= instance.OnPitchYawController;
+            @PitchYawController.canceled -= instance.OnPitchYawController;
         }
 
         public void RemoveCallbacks(IAirplaneControlsActions instance)
@@ -531,6 +554,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
         void OnFlapsUP(InputAction.CallbackContext context);
         void OnFlapsDOWN(InputAction.CallbackContext context);
         void OnCameraSwitch(InputAction.CallbackContext context);
-        void OnPitchYaw(InputAction.CallbackContext context);
+        void OnPitchYawMouse(InputAction.CallbackContext context);
+        void OnPitchYawController(InputAction.CallbackContext context);
     }
 }

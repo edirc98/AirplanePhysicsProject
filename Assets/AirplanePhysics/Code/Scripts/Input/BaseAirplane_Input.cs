@@ -32,7 +32,8 @@ namespace AirplanePhysics.AirplaneInputs
         //[Range(0, 1)] public float YawSensitivity;
 
         [Header("Input System Actions")]
-        private AirplaneInputActions airplaneActions;
+        private AirplaneInputActions _airplaneActions;
+        private PlayerInput _playerInput;
 
         #endregion
 
@@ -51,8 +52,9 @@ namespace AirplanePhysics.AirplaneInputs
         #region UNITY BUILT-IN METHODS
         private void Awake()
         {
-            airplaneActions = new AirplaneInputActions();
-            airplaneActions.AirplaneControls.Enable();
+            _playerInput = GetComponent<PlayerInput>();
+            _airplaneActions = new AirplaneInputActions();
+            _airplaneActions.AirplaneControls.Enable();
             SubscribeInputEvents();
         }
         void FixedUpdate()
@@ -62,7 +64,7 @@ namespace AirplanePhysics.AirplaneInputs
 
         private void OnDisable()
         {
-            airplaneActions.AirplaneControls.Disable();
+            _airplaneActions.AirplaneControls.Disable();
         }
 
         #endregion
@@ -80,8 +82,6 @@ namespace AirplanePhysics.AirplaneInputs
             HandlePitchYaw();
             //BrakeHandling
             HandleBrake();
-
-            //HandlePitchRoll();
         }
 
 
@@ -89,7 +89,7 @@ namespace AirplanePhysics.AirplaneInputs
         protected virtual void HandleThrottle()
         {
             //THROTTLE
-            float inputValue = airplaneActions.AirplaneControls.Throttle.ReadValue<float>();
+            float inputValue = _airplaneActions.AirplaneControls.Throttle.ReadValue<float>();
             if (inputValue != 0f)
             {
                 f_throttle += ThrottleSensitivity * inputValue;
@@ -101,7 +101,7 @@ namespace AirplanePhysics.AirplaneInputs
         protected virtual void HandleRoll()
         {
             //ROLL
-            float inputValue = airplaneActions.AirplaneControls.Roll.ReadValue<float>();
+            float inputValue = _airplaneActions.AirplaneControls.Roll.ReadValue<float>();
             if (inputValue != 0f)
             {
                 f_roll += RollSensitivity * inputValue;
@@ -125,20 +125,32 @@ namespace AirplanePhysics.AirplaneInputs
 
         protected virtual void HandlePitchYaw()
         {
-            
-            //TODO -> Check what happens when gamepad is conected too
-            //if(airplaneActions.)
-            Vector2 mousePos = airplaneActions.AirplaneControls.PitchYaw.ReadValue<Vector2>();
-            //Vector2 mousePos = Mouse.current.position.value;
+            bool usingGamepad = _playerInput.currentControlScheme.Equals(_airplaneActions.Airplane_GamepadScheme.name) ? true : false;
 
-            float normalizedX = Mathf.InverseLerp(0, Screen.width, mousePos.x);
-            float scaledNormalizedX = Mathf.Lerp(-1.0f, 1.0f, normalizedX);
+            Vector2 picthYawInput;
 
-            float normalizedY = Mathf.InverseLerp(0, Screen.height, mousePos.y);
-            float scaledNormalizedY = Mathf.Lerp(-1.0f, 1.0f, normalizedY);
+            if (usingGamepad) {
+                Debug.Log("Gamepad input");
+                picthYawInput = _airplaneActions.AirplaneControls.PitchYawController.ReadValue<Vector2>();
 
-            f_yaw = scaledNormalizedX;
-            f_pitch = scaledNormalizedY;
+                f_yaw = picthYawInput.x;
+                f_pitch = picthYawInput.y;
+            }
+            else
+            {
+                Debug.Log("Mouse input");
+
+                picthYawInput = _airplaneActions.AirplaneControls.PitchYawMouse.ReadValue<Vector2>();
+
+                float normalizedX = Mathf.InverseLerp(0, Screen.width, picthYawInput.x);
+                float scaledNormalizedX = Mathf.Lerp(-1.0f, 1.0f, normalizedX);
+
+                float normalizedY = Mathf.InverseLerp(0, Screen.height, picthYawInput.y);
+                float scaledNormalizedY = Mathf.Lerp(-1.0f, 1.0f, normalizedY);
+
+                f_yaw = scaledNormalizedX;
+                f_pitch = scaledNormalizedY;
+            }
 
             //Clamp Values
             f_pitch = Mathf.Clamp(f_pitch, -1.0f, 1.0f);
@@ -148,7 +160,7 @@ namespace AirplanePhysics.AirplaneInputs
 
         protected virtual void HandleBrake()
         {
-            float inputValue = airplaneActions.AirplaneControls.Brake.ReadValue<float>();
+            float inputValue = _airplaneActions.AirplaneControls.Brake.ReadValue<float>();
             f_brake = inputValue;
         }
 
@@ -173,13 +185,15 @@ namespace AirplanePhysics.AirplaneInputs
         private void SubscribeInputEvents()
         {
             //Flaps
-            airplaneActions.AirplaneControls.FlapsUP.performed += HandleFlapsUp;
-            airplaneActions.AirplaneControls.FlapsDOWN.performed += HandleFlapsDown;
+            _airplaneActions.AirplaneControls.FlapsUP.performed += HandleFlapsUp;
+            _airplaneActions.AirplaneControls.FlapsDOWN.performed += HandleFlapsDown;
 
             //Camera switch
-            airplaneActions.AirplaneControls.CameraSwitch.performed += HandleCameraSwitch;
+            _airplaneActions.AirplaneControls.CameraSwitch.performed += HandleCameraSwitch;
 
         }
+
+
         #endregion
     }
 }

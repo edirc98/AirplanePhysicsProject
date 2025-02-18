@@ -60,9 +60,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "PitchYaw",
-                    "type": "PassThrough",
+                    "name": "PitchYawMouse",
+                    "type": "Value",
                     "id": "7dcde984-cec9-421d-8b3d-c3fd602adb51",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "PitchYawController",
+                    "type": "Value",
+                    "id": "cbe1b64b-5f8e-4e51-9904-277f2a01bb90",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -226,23 +235,12 @@
                 },
                 {
                     "name": "",
-                    "id": "4aceaca8-9ff3-44b6-b22e-5eb93ce29c7a",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Airplane_Gamepad",
-                    "action": "PitchYaw",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "b12e6844-f88c-4cd9-997a-786e1454d594",
-                    "path": "<Pointer>/position",
+                    "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Airplane_Keyboard",
-                    "action": "PitchYaw",
+                    "action": "PitchYawMouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -289,6 +287,17 @@
                     "action": "Roll",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaec6d64-d22d-4807-9ae4-973f2b9f6a9f",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "InvertVector2(invertX=false)",
+                    "groups": ";Airplane_Gamepad",
+                    "action": "PitchYawController",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
@@ -300,6 +309,11 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
                     "isOptional": false,
                     "isOR": false
                 }
