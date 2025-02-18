@@ -45,6 +45,11 @@ public class Gate : MonoBehaviour
        
     }
 
+    private void Update()
+    {
+        TEST_GATE();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
@@ -139,6 +144,14 @@ public class Gate : MonoBehaviour
             return transform.forward;
         }
         else return -transform.forward;
+    }
+
+
+    //DELETE ONCE TESTED
+    private void TEST_GATE()
+    {
+        ChangeGateColor(isActive);
+        gatePingPong.SetActive(isActive);
     }
     #endregion
 }
