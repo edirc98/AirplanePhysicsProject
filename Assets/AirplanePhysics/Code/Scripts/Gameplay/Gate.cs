@@ -13,9 +13,10 @@ public class Gate : MonoBehaviour
     public bool isActive = false;
     [Range(0f, 1f)] public float crossingSensitivity;
 
-    [Header("Gate Colors")]
+    [Header("Gate Colors & Efects")]
     public Color gateActiveColor;
     public Color gateInactiveColor;
+    public PingPong gatePingPong;
 
     [Header("UI Properties")]
     [SerializeField] private Material gateVisualMaterial;
@@ -34,11 +35,13 @@ public class Gate : MonoBehaviour
     {
         gateVisualMaterial = GetComponentInChildren<MeshRenderer>().material;
         gateArrowImages = GetComponentsInChildren<Image>().ToList();
+        gatePingPong = GetComponentInChildren<PingPong>();
     }
     void Start()
     {
         gateDirection = GetGateDirection();
         ChangeGateColor(isActive);
+        gatePingPong.SetActive(isActive);
        
     }
 
@@ -62,19 +65,20 @@ public class Gate : MonoBehaviour
     }
     #endregion
 
-
     #region CUSTOM METHODS
 
     public void ActivateGate()
     {
         isActive = true;
         ChangeGateColor(isActive);
+        gatePingPong.SetActive(isActive);
     }
 
     public void DeactivateGate() 
     {
         isActive = false;
         ChangeGateColor(isActive);
+        gatePingPong.SetActive(isActive);
     }
 
     private void CheckCrossingDirection(Vector3 direction)

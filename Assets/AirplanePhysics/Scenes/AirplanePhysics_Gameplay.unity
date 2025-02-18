@@ -4374,6 +4374,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8533228577724167341, guid: 4452f83567ab2ab45bac21a1b537a084, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533228577724167341, guid: 4452f83567ab2ab45bac21a1b537a084, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533228577724167341, guid: 4452f83567ab2ab45bac21a1b537a084, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 8602515032626569331, guid: 4452f83567ab2ab45bac21a1b537a084, type: 3}
       propertyPath: gateActiveColor.a
       value: 1
