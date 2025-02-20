@@ -19,7 +19,6 @@ public class Track : MonoBehaviour
     }
     #endregion
 
-
     #region CUSTOM METHODS
     #endregion
 }
