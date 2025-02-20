@@ -15,7 +15,7 @@ MonoBehaviour:
   AirplaneCenterOfGravityPosition: {x: 0, y: -0.67999995, z: 0.73}
   AirplaneWeight: 600
   AirplaneMaxSpeed: 70
-  AirplaneMaxLiftForce: 5000
+  AirplaneMaxLiftForce: 4750
   AirplaneLiftCurve:
     serializedVersion: 2
     m_Curve:
@@ -51,9 +51,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   AirplaneDragFactor: 0.0005
   AirplaneFlapsDragFactor: 0.0002
-  AirplanePitchForce: 1500
-  AirplaneRollForce: 1500
-  AirplaneYawForce: 1500
+  AirplanePitchForce: 2000
+  AirplaneRollForce: 2000
+  AirplaneYawForce: 2000
   AirplaneRigidBodyLerpSpeed: 0.03
   GroundEffectMaxGroundDistance: 3
   GroundEffectLiftForce: 1000

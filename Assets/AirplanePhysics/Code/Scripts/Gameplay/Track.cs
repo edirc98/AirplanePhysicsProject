@@ -25,19 +25,34 @@ public class Track : MonoBehaviour
         StartTrack();
     }
 
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
 
     }
+
+    private void OnDrawGizmos()
+    {
+        //Visualize the track
+        FindGates();
+        if (Gates.Count > 0) 
+        {
+            for (int i = 0; i < Gates.Count; i++) 
+            {
+                if(i+1 == Gates.Count) //Last Gate of the list
+                {
+                    break;
+                }
+                else
+                {
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawLine(Gates[i].transform.position, Gates[i + 1].transform.position);
+                }
+            }
+        }
+
+    }
+
     #endregion
 
     #region CUSTOM METHODS
@@ -59,7 +74,6 @@ public class Track : MonoBehaviour
             }
         }
     }
-
     public void StartTrack()
     {
         if (Gates.Count > 0)
