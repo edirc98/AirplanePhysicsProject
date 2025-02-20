@@ -52,6 +52,7 @@ namespace AirplanePhysics
         [SerializeField] private bool isGrounded = false; 
         [SerializeField] private bool isLanded = false;
         [SerializeField] private bool isFlying = false;
+        [SerializeField] private bool isCrashed = false;
 
         #endregion
 
@@ -212,6 +213,7 @@ namespace AirplanePhysics
                     {
                         isLanded = true;
                         isGrounded = true;
+                        isCrashed = false;
                         isFlying = false;
                         _airplaneState = AIRPLANE_STATE.LANDED;
                     }
@@ -219,14 +221,25 @@ namespace AirplanePhysics
                     {
                         isLanded = false;
                         isGrounded = true;
+                        isCrashed = false;
                         isFlying = false;
                         _airplaneState = AIRPLANE_STATE.GROUNDED;
                     }
+                }
+                else if(groundedCount == 0 && _rb.linearVelocity.magnitude < 2.0f)
+                {
+                    
+                    isLanded = false;
+                    isGrounded = false;
+                    isFlying = false;
+                    isCrashed = true;
+                    _airplaneState = AIRPLANE_STATE.CRASHED;
                 }
                 else
                 {
                     isLanded = false;
                     isGrounded = false;
+                    isCrashed = false;
                     isFlying = true;
                     _airplaneState = AIRPLANE_STATE.FLYING;
                 }

@@ -5331,7 +5331,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5275941356147924954, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.15
+      value: 2.02
       objectReference: {fileID: 0}
     - target: {fileID: 5275941356147924954, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5731,6 +5731,7 @@ MonoBehaviour:
   isGrounded: 0
   isLanded: 0
   isFlying: 0
+  isCrashed: 0
 --- !u!114 &9103217766581598521
 MonoBehaviour:
   m_ObjectHideFlags: 0
