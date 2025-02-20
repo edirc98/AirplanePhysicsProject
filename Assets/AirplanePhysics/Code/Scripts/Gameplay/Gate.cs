@@ -28,6 +28,7 @@ public class Gate : MonoBehaviour
 
     //Privates
     private Vector3 gateDirection;
+    private bool isCleared = false;
     #endregion
 
     #region UNITY BUILT-IN METHODS
@@ -52,7 +53,7 @@ public class Gate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if(other.tag == "Player" && isActive)
         {
             Debug.Log("Player crossed gate -> " + transform.gameObject.name);
             CheckCrossingDirection(other.transform.forward);
@@ -82,6 +83,7 @@ public class Gate : MonoBehaviour
     public void DeactivateGate() 
     {
         isActive = false;
+        isCleared = false;
         ChangeGateColor(isActive);
         gatePingPong.SetActive(isActive);
     }
@@ -92,11 +94,13 @@ public class Gate : MonoBehaviour
         if (dot > crossingSensitivity)
         {
             Debug.Log("Crossing Succesfull");
+            isCleared = true;
+
             if(onClearedGate != null)
             {
                 onClearedGate.Invoke();
             }
-            
+            DeactivateGate();
         }
         else 
         {
