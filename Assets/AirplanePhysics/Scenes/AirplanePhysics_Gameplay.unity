@@ -5269,6 +5269,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3978494396161937867, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: m_SuspensionDistance
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4136327053099434002, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.028278232
@@ -5313,6 +5317,10 @@ PrefabInstance:
       propertyPath: 'AirplaneCameras.Array.data[0]'
       value: 
       objectReference: {fileID: 1328639209}
+    - target: {fileID: 4807405653489020436, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: m_SuspensionDistance
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5271210114751466516, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_Name
       value: RightFlap
@@ -5381,6 +5389,14 @@ PrefabInstance:
       propertyPath: controlSurfaceTransform
       value: 
       objectReference: {fileID: 807782539}
+    - target: {fileID: 6027731254545727077, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: m_SuspensionDistance
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027731254545727077, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: m_SuspensionSpring.targetPosition
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6191904112193729106, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_TagString
       value: Player
@@ -5711,6 +5727,10 @@ MonoBehaviour:
   - {fileID: 1552268031}
   - {fileID: 599455824}
   groundEffectFeature: {fileID: 0}
+  _airplaneState: 0
+  isGrounded: 0
+  isLanded: 0
+  isFlying: 0
 --- !u!114 &9103217766581598521
 MonoBehaviour:
   m_ObjectHideFlags: 0

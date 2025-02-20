@@ -18,7 +18,10 @@ namespace AirplanePhysics.Component
         public float steerAngle = 20.0f; 
         public float steerSmoothSpeed = 1.0f;
 
-
+        #region PROPERTIES
+        private bool b_isGrounded; 
+        public bool IsGrounded { get { return b_isGrounded; } }
+        #endregion
 
 
         private WheelCollider _wheelCollider;
@@ -77,6 +80,9 @@ namespace AirplanePhysics.Component
                     _wheelCollider.steerAngle = finalSteerAngle;
                 }
                 
+
+                //Ckeck if wheel is grounded
+                b_isGrounded = _wheelCollider.isGrounded;
             }
 
         }

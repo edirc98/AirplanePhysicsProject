@@ -7,6 +7,15 @@ using AirplanePhysics.Feature;
 
 namespace AirplanePhysics
 {
+
+    public enum AIRPLANE_STATE
+    {
+        LANDED, 
+        GROUNDED,
+        FLYING, 
+        CRASHED
+    }
+
     [RequireComponent(typeof(Airplane_Characteristics))]
     public class Airplane_Controller : BaseRigidbody_Controller
     {
@@ -37,6 +46,12 @@ namespace AirplanePhysics
 
         private float _currentMSL; // MEAN SEA LEVEL, Altitude from 0
         private float _currentAGL; //ABOVE GROUND LEVEL, Altitude to closest surface
+
+        [SerializeField] private AIRPLANE_STATE _airplaneState = AIRPLANE_STATE.LANDED;
+
+        [SerializeField] private bool isGrounded = false; 
+        [SerializeField] private bool isLanded = false;
+        [SerializeField] private bool isFlying = false;
 
         #endregion
 
@@ -85,6 +100,9 @@ namespace AirplanePhysics
                     wheel.InitWheel();
                 }
             }
+
+            //Check if the plane is grounded
+            InvokeRepeating("CkeckPlaneState", 2.0f, 1.5f);
         }
 
         
@@ -102,7 +120,6 @@ namespace AirplanePhysics
                 HandleAltitude();
             }
         }
-
         private void HandleEngines()
         {
             if(airplane_Engines != null && airplane_Engines.Count > 0)
@@ -121,7 +138,6 @@ namespace AirplanePhysics
                 characteristics.UpdateCharacteristics();
             } 
         }
-        
         private void HandleWheels()
         {
             if(airplane_Wheels.Count > 0)
@@ -132,7 +148,6 @@ namespace AirplanePhysics
                 } 
             }
         }
-
         private void HandleControlSurfaces()
         {
             if (airplane_controlSurfaces.Count > 0)
@@ -143,7 +158,6 @@ namespace AirplanePhysics
                 }
             }
         }
-
         private void HandleAltitude()
         {
             _currentMSL = transform.position.y;
@@ -154,7 +168,6 @@ namespace AirplanePhysics
                 _currentAGL = transform.position.y - rayHit.point.y;
             }
         }
-
         private void GetPresetInfo()
         {
             if(preset != null)
@@ -183,6 +196,42 @@ namespace AirplanePhysics
             }
         }
 
+        private void CkeckPlaneState()
+        {
+            if (airplane_Wheels.Count > 0) 
+            {
+                int groundedCount = 0;
+                foreach (Airplane_Wheel wheel in airplane_Wheels) 
+                {
+                    if (wheel.IsGrounded) { groundedCount++; }
+                }
+
+                if (groundedCount >= airplane_Wheels.Count - 1) //At least all wheels - 1 to consider the plane grounded
+                {
+                    if (_rb.linearVelocity.magnitude < 2.0f)
+                    {
+                        isLanded = true;
+                        isGrounded = true;
+                        isFlying = false;
+                        _airplaneState = AIRPLANE_STATE.LANDED;
+                    }
+                    else
+                    {
+                        isLanded = false;
+                        isGrounded = true;
+                        isFlying = false;
+                        _airplaneState = AIRPLANE_STATE.GROUNDED;
+                    }
+                }
+                else
+                {
+                    isLanded = false;
+                    isGrounded = false;
+                    isFlying = true;
+                    _airplaneState = AIRPLANE_STATE.FLYING;
+                }
+            }
+        }
         #endregion
     }
 }
