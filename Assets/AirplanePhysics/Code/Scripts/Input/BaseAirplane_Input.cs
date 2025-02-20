@@ -129,8 +129,8 @@ namespace AirplanePhysics.AirplaneInputs
 
             Vector2 picthYawInput;
 
-            if (usingGamepad) {
-                Debug.Log("Gamepad input");
+            if (usingGamepad) 
+            {
                 picthYawInput = _airplaneActions.AirplaneControls.PitchYawController.ReadValue<Vector2>();
 
                 f_yaw = picthYawInput.x;
@@ -138,8 +138,6 @@ namespace AirplanePhysics.AirplaneInputs
             }
             else
             {
-                Debug.Log("Mouse input");
-
                 picthYawInput = _airplaneActions.AirplaneControls.PitchYawMouse.ReadValue<Vector2>();
 
                 float normalizedX = Mathf.InverseLerp(0, Screen.width, picthYawInput.x);

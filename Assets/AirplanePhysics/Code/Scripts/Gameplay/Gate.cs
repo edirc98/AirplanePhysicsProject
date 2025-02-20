@@ -23,8 +23,8 @@ public class Gate : MonoBehaviour
     [SerializeField] private List<Image> gateArrowImages = new List<Image>();
 
     [Header("Gate Events")]
-    public UnityEvent onClearedGate = new UnityEvent();
-    public UnityEvent onFailedGate = new UnityEvent();
+    public UnityEvent OnClearedGate = new UnityEvent();
+    public UnityEvent OnFailedGate = new UnityEvent();
 
     //Privates
     private Vector3 gateDirection;
@@ -46,14 +46,9 @@ public class Gate : MonoBehaviour
        
     }
 
-    private void Update()
-    {
-        TEST_GATE();
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player" && isActive)
+        if(other.tag == "Player" && isActive && !isCleared)
         {
             Debug.Log("Player crossed gate -> " + transform.gameObject.name);
             CheckCrossingDirection(other.transform.forward);
@@ -96,18 +91,18 @@ public class Gate : MonoBehaviour
             Debug.Log("Crossing Succesfull");
             isCleared = true;
 
-            if(onClearedGate != null)
+            if(OnClearedGate != null)
             {
-                onClearedGate.Invoke();
+                OnClearedGate.Invoke();
             }
             DeactivateGate();
         }
         else 
         {
             Debug.Log("Crossing Failed");
-            if(onFailedGate != null)
+            if(OnFailedGate != null)
             {
-                onFailedGate.Invoke();
+                OnFailedGate.Invoke();
             }
         }
     }
@@ -150,12 +145,5 @@ public class Gate : MonoBehaviour
         else return -transform.forward;
     }
 
-
-    //DELETE ONCE TESTED
-    private void TEST_GATE()
-    {
-        ChangeGateColor(isActive);
-        gatePingPong.SetActive(isActive);
-    }
     #endregion
 }

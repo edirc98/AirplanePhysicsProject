@@ -2,12 +2,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.Events;
 
 public class Track : MonoBehaviour
 {
     #region VARIABLES
     [Header("Track Variables")]
     public List<Gate> Gates = new List<Gate>();
+
+    [Header("Track Events")]
+    public UnityEvent OnCompletedTrack = new UnityEvent();
 
     private int currentGateID;
     #endregion
@@ -18,6 +22,7 @@ public class Track : MonoBehaviour
         FindGates();
         InitGates();
         currentGateID = 0;
+        StartTrack();
     }
 
 
@@ -49,15 +54,32 @@ public class Track : MonoBehaviour
             foreach (Gate gate in Gates) 
             {
                 gate.DeactivateGate();
-                gate.onClearedGate.AddListener(SelectNextGate);
+                gate.OnClearedGate.AddListener(SelectNextGate);
 
             }
         }
     }
 
+    public void StartTrack()
+    {
+        if (Gates.Count > 0)
+        {
+            Gates[currentGateID].ActivateGate();
+        }
+    }
     private void SelectNextGate()
     {
-
+        currentGateID++;
+        if(currentGateID == Gates.Count) //Last Gate, track finished
+        {
+            Debug.Log("Completed Track");
+            if(OnCompletedTrack != null)
+            {
+                OnCompletedTrack.Invoke();
+            }
+            return;
+        }
+        Gates[currentGateID].ActivateGate();
     }
 
     #endregion

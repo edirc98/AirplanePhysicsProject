@@ -595,12 +595,12 @@ MonoBehaviour:
   reversedCrossingDirection: 0
   isActive: 0
   crossingSensitivity: 0
-  gateActiveColor: {r: 0, g: 0, b: 0, a: 0}
-  gateInactiveColor: {r: 0, g: 0, b: 0, a: 0}
+  gateActiveColor: {r: 0.14285529, g: 1, b: 0, a: 0}
+  gateInactiveColor: {r: 1, g: 0.38202363, b: 0, a: 0}
   gatePingPong: {fileID: 0}
   gateVisualMaterial: {fileID: 0}
   gateArrowImages: []
-  onClearedGate:
+  OnClearedGate:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3611897506882095000}
@@ -615,7 +615,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onFailedGate:
+  OnFailedGate:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3611897506882095000}

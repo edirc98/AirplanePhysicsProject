@@ -20,7 +20,6 @@ public class Track_Manager : MonoBehaviour
     }
     #endregion
 
-
     #region CUSTOM METHODS
     #endregion
 }
