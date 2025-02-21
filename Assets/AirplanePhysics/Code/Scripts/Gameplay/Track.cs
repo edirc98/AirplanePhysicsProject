@@ -25,12 +25,6 @@ public class Track : MonoBehaviour
         StartTrack();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void OnDrawGizmos()
     {
         //Visualize the track

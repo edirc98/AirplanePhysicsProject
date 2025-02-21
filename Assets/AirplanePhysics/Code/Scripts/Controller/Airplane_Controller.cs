@@ -48,11 +48,19 @@ namespace AirplanePhysics
         private float _currentAGL; //ABOVE GROUND LEVEL, Altitude to closest surface
 
         [SerializeField] private AIRPLANE_STATE _airplaneState = AIRPLANE_STATE.LANDED;
+        public AIRPLANE_STATE State { get { return _airplaneState; } }
 
         [SerializeField] private bool isGrounded = false; 
+        public bool IsGrounded { get { return isGrounded; } }
+
         [SerializeField] private bool isLanded = false;
+        public bool IsLanded { get { return isLanded; } }
+
         [SerializeField] private bool isFlying = false;
+        public bool IsFlying { get { return isFlying; } }
+
         [SerializeField] private bool isCrashed = false;
+        public bool IsCrashed {  get { return isCrashed; } }    
 
         #endregion
 

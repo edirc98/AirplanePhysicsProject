@@ -1,7 +1,11 @@
 using AirplanePhysics;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
+using TMPro; 
 
 
 public class Track_Manager : MonoBehaviour
@@ -10,7 +14,17 @@ public class Track_Manager : MonoBehaviour
     [Header("Track Manager Properties")]
     public List<Track> Tracks = new List<Track>();
 
+    [Header("Track Manager UI")]
+    public TMP_Text gateText;
+    public TMP_Text timeText;
+    public TMP_Text scoreText; 
+
+    [Header("Track Manager Events")]
+    public UnityEvent OnCompletedRace = new UnityEvent();
+
     public Airplane_Controller currentAirplane;
+
+    private Track currentTrack; 
     #endregion
 
     #region UNITY BUILT-IN METHODS
@@ -30,7 +44,10 @@ public class Track_Manager : MonoBehaviour
 
     void Update()
     {
-
+        if (currentTrack != null) 
+        {
+            UpdateTrackUI();
+        }
     }
     #endregion
 
@@ -55,6 +72,10 @@ public class Track_Manager : MonoBehaviour
     private void CompletedTrack()
     {
         Debug.Log("Track Manager: Track Completed");
+        if (currentAirplane != null)
+        {
+            StartCoroutine(WaitForLanding());
+        }
     }
 
     public void StartTrack(int trackId)
@@ -63,16 +84,47 @@ public class Track_Manager : MonoBehaviour
         {
             for (int i = 0; i < Tracks.Count; i++)
             {
-                if (i != trackId)
-                {
-                    Tracks[i].gameObject.SetActive(false);
-                }
-                else
+                if (i == trackId)
                 {
                     Tracks[trackId].gameObject.SetActive(true);
                     Tracks[trackId].StartTrack();
+                    currentTrack = Tracks[trackId];
+                }
+                else
+                {
+                    Tracks[i].gameObject.SetActive(false);
                 }
             }
+        }
+    }
+
+    private IEnumerator WaitForLanding()
+    {
+        while(currentAirplane.State != AIRPLANE_STATE.LANDED)
+        {
+            yield return null;
+        }
+
+        if (OnCompletedRace != null)
+        {
+            Debug.Log("Landed Succesfull. Race Completed");
+            OnCompletedRace.Invoke();
+        }
+    }
+
+    private void UpdateTrackUI() //TODO
+    {
+        if(gateText != null)
+        {
+
+        }
+        if(timeText != null)
+        {
+            
+        }
+        if(scoreText != null)
+        {
+
         }
     }
     #endregion
