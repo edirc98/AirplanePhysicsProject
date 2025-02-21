@@ -1659,6 +1659,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tracks: []
+  gateText: {fileID: 134462701}
+  timeText: {fileID: 59130048}
+  scoreText: {fileID: 1784434903}
   OnCompletedRace:
     m_PersistentCalls:
       m_Calls:

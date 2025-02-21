@@ -24,7 +24,7 @@ public class Track_Manager : MonoBehaviour
 
     public Airplane_Controller currentAirplane;
 
-    private Track currentTrack; 
+    private Track _currentTrack; 
     #endregion
 
     #region UNITY BUILT-IN METHODS
@@ -44,7 +44,7 @@ public class Track_Manager : MonoBehaviour
 
     void Update()
     {
-        if (currentTrack != null) 
+        if (_currentTrack != null) 
         {
             UpdateTrackUI();
         }
@@ -88,7 +88,7 @@ public class Track_Manager : MonoBehaviour
                 {
                     Tracks[trackId].gameObject.SetActive(true);
                     Tracks[trackId].StartTrack();
-                    currentTrack = Tracks[trackId];
+                    _currentTrack = Tracks[trackId];
                 }
                 else
                 {
@@ -116,11 +116,13 @@ public class Track_Manager : MonoBehaviour
     {
         if(gateText != null)
         {
-
+            gateText.text = "Gates: " + _currentTrack.CurrentGateID.ToString() + " / " + _currentTrack.TotalGates.ToString();
         }
         if(timeText != null)
         {
-            
+            string mins = _currentTrack.CurrentMinutes.ToString("00");
+            string secs = _currentTrack.CurrentSeconds.ToString("00");
+            timeText.text = mins +" : "+ secs;
         }
         if(scoreText != null)
         {

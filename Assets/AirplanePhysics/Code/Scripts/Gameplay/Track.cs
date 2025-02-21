@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Linq;
 using System;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 
 public class Track : MonoBehaviour
 {
@@ -13,7 +14,19 @@ public class Track : MonoBehaviour
     [Header("Track Events")]
     public UnityEvent OnCompletedTrack = new UnityEvent();
 
-    private int currentGateID;
+    private int _currentGateID;
+    public int CurrentGateID {  get { return _currentGateID; } }
+
+    private int _totalGates; 
+    public int TotalGates {  get { return _totalGates; } }
+
+    private float _startTime;
+    private int _currentTime;
+
+    private int _currentMins; 
+    public int CurrentMinutes { get { return _currentMins; } }
+    private int _currentSecs;
+    public int CurrentSeconds { get { return _currentSecs; } }
     #endregion
 
     #region UNITY BUILT-IN METHODS
@@ -21,8 +34,13 @@ public class Track : MonoBehaviour
     {
         FindGates();
         InitGates();
-        currentGateID = 0;
+        _currentGateID = 0;
         StartTrack();
+    }
+
+    private void Update()
+    {
+        UpdateTrackStats();
     }
 
     private void OnDrawGizmos()
@@ -55,6 +73,7 @@ public class Track : MonoBehaviour
     {
         Gates.Clear();
         Gates = GetComponentsInChildren<Gate>().ToList();
+        _totalGates = Gates.Count;
     }
     private void InitGates()
     {
@@ -70,15 +89,17 @@ public class Track : MonoBehaviour
     }
     public void StartTrack()
     {
+
         if (Gates.Count > 0)
         {
-            Gates[currentGateID].ActivateGate();
+            _startTime = Time.time;
+            Gates[_currentGateID].ActivateGate();
         }
     }
     private void SelectNextGate()
     {
-        currentGateID++;
-        if(currentGateID == Gates.Count) //Last Gate, track finished
+        _currentGateID++;
+        if(_currentGateID == Gates.Count) //Last Gate, track finished
         {
             if(OnCompletedTrack != null)
             {
@@ -86,8 +107,14 @@ public class Track : MonoBehaviour
             }
             return;
         }
-        Gates[currentGateID].ActivateGate();
+        Gates[_currentGateID].ActivateGate();
     }
 
+    private void UpdateTrackStats()
+    {
+        _currentTime = (int)(Time.time - _startTime);
+        _currentMins = (_currentTime / 60);
+        _currentSecs = (_currentTime -(_currentMins * 60));
+    }
     #endregion
 }
