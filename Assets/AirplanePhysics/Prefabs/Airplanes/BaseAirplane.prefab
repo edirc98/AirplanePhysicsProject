@@ -2749,6 +2749,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2178775332015593743}
   - component: {fileID: 8583872240564172851}
+  - component: {fileID: 6921066809541725639}
   m_Layer: 0
   m_Name: Engine
   m_TagString: Untagged
@@ -2810,6 +2811,24 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   propeller: {fileID: 0}
+  _fuelTank: {fileID: 0}
+--- !u!114 &6921066809541725639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4831029533320477255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58cfa0abc273c614f8be3819d0d79e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fuelCapacity: 100
+  fuelBurnRate: 20
+  OnFullFuel:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4914588769496630927
 GameObject:
   m_ObjectHideFlags: 0
@@ -3453,7 +3472,7 @@ GameObject:
   - component: {fileID: 5275941356147924954}
   m_Layer: 0
   m_Name: BaseAirplane
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

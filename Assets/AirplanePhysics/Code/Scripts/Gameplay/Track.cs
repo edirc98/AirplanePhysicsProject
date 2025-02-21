@@ -17,7 +17,7 @@ public class Track : MonoBehaviour
     #endregion
 
     #region UNITY BUILT-IN METHODS
-    private void Awake()
+    private void Start()
     {
         FindGates();
         InitGates();
@@ -86,7 +86,6 @@ public class Track : MonoBehaviour
         currentGateID++;
         if(currentGateID == Gates.Count) //Last Gate, track finished
         {
-            Debug.Log("Completed Track");
             if(OnCompletedTrack != null)
             {
                 OnCompletedTrack.Invoke();

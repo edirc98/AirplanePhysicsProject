@@ -34,9 +34,7 @@ public class Gate : MonoBehaviour
     #region UNITY BUILT-IN METHODS
     private void Awake()
     {
-        gateVisualMaterial = GetComponentInChildren<MeshRenderer>().material;
-        gateArrowImages = GetComponentsInChildren<Image>().ToList();
-        gatePingPong = GetComponentInChildren<PingPong>();
+        InitGateProperties();
     }
     void Start()
     {
@@ -68,6 +66,12 @@ public class Gate : MonoBehaviour
 
     #region CUSTOM METHODS
 
+    private void InitGateProperties()
+    {
+        gateVisualMaterial = GetComponentInChildren<MeshRenderer>().material;
+        gateArrowImages = GetComponentsInChildren<Image>().ToList();
+        gatePingPong = GetComponentInChildren<PingPong>();
+    }
     public void ActivateGate()
     {
         isActive = true;
