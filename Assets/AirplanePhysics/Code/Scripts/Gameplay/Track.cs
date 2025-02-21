@@ -27,6 +27,9 @@ public class Track : MonoBehaviour
     public int CurrentMinutes { get { return _currentMins; } }
     private int _currentSecs;
     public int CurrentSeconds { get { return _currentSecs; } }
+
+    private int _currentScore; 
+    public int CurrentScore { get { return _currentScore; } }
     #endregion
 
     #region UNITY BUILT-IN METHODS
@@ -89,15 +92,21 @@ public class Track : MonoBehaviour
     }
     public void StartTrack()
     {
-
         if (Gates.Count > 0)
         {
             _startTime = Time.time;
+            _currentScore = 0;
             Gates[_currentGateID].ActivateGate();
         }
     }
-    private void SelectNextGate()
+    private void SelectNextGate(float distPercent)
     {
+        
+        int gateScore = Mathf.RoundToInt(100.0f * distPercent);
+        gateScore = Mathf.Clamp(gateScore, 0, 100);
+        Debug.Log("GateScore: " + gateScore);
+        _currentScore += gateScore;
+
         _currentGateID++;
         if(_currentGateID == Gates.Count) //Last Gate, track finished
         {

@@ -126,7 +126,7 @@ public class Track_Manager : MonoBehaviour
         }
         if(scoreText != null)
         {
-
+            scoreText.text = "Score: " + _currentTrack.CurrentScore.ToString("0000");
         }
     }
     #endregion

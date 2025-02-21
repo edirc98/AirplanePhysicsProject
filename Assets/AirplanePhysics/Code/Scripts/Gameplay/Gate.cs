@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Linq;
 
+
+[System.Serializable] public class FloatEvent : UnityEvent<float>{}
 public class Gate : MonoBehaviour
 {
     #region VARIABLES
@@ -23,12 +25,16 @@ public class Gate : MonoBehaviour
     [SerializeField] private List<Image> gateArrowImages = new List<Image>();
 
     [Header("Gate Events")]
-    public UnityEvent OnClearedGate = new UnityEvent();
+    public FloatEvent OnClearedGate = new FloatEvent();
     public UnityEvent OnFailedGate = new UnityEvent();
+
 
     //Privates
     private Vector3 gateDirection;
     private bool isCleared = false;
+
+    //Gate score computation
+    [SerializeField] private float gateCheckRadius; 
     #endregion
 
     #region UNITY BUILT-IN METHODS
@@ -41,6 +47,9 @@ public class Gate : MonoBehaviour
         gateDirection = GetGateDirection();
         ChangeGateColor(isActive);
         gatePingPong.SetActive(isActive);
+
+        gateCheckRadius = (GetComponent<BoxCollider>().size.x / 2.0f) + 2.0f; //+2 taking into acount the wingspan of the plane,
+                                                                              //because the tip of the wing can collide and the transform of the plane can be outside the check radius
        
     }
 
@@ -48,8 +57,13 @@ public class Gate : MonoBehaviour
     {
         if(other.tag == "Player" && isActive && !isCleared)
         {
+            float distToCenter = Vector2.Distance(other.transform.position, transform.position); //How far from center the place cross the gate
+            //Compare the dist to the center with the radius and return a 1 to 0 value, the closer to the center the better
+            float distPercent = 1 - (Mathf.InverseLerp(0, gateCheckRadius, distToCenter));
+
             Debug.Log("Player crossed gate -> " + transform.gameObject.name);
-            CheckCrossingDirection(other.transform.forward);
+
+            CheckCrossingDirection(other.transform.forward, distPercent);
         }
     }
 
@@ -87,23 +101,23 @@ public class Gate : MonoBehaviour
         gatePingPong.SetActive(isActive);
     }
 
-    private void CheckCrossingDirection(Vector3 direction)
+    private void CheckCrossingDirection(Vector3 direction, float distPercent)
     {
         float dot = Vector3.Dot(gateDirection, direction);
         if (dot > crossingSensitivity)
         {
-            Debug.Log("Crossing Succesfull");
+            //Debug.Log("Crossing Succesfull");
             isCleared = true;
 
             if(OnClearedGate != null)
             {
-                OnClearedGate.Invoke();
+                OnClearedGate.Invoke(distPercent);
             }
             DeactivateGate();
         }
         else 
         {
-            Debug.Log("Crossing Failed");
+            //Debug.Log("Crossing Failed");
             if(OnFailedGate != null)
             {
                 OnFailedGate.Invoke();
