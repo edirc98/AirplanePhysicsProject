@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 
@@ -18,10 +19,10 @@ namespace AirplanePhysics.AirplaneInputs
         [SerializeField] protected int i_maxFlapsIncrements = 2;
         protected int i_flaps = 0;
 
-        [SerializeField] protected KeyCode k_BrakeKey = KeyCode.Space;
         protected float f_brake = 0.0f;
 
         protected bool b_cameraSwitch = false;
+        protected bool b_engineON = false; 
 
 
         [Header("Input Sensitivity")]
@@ -41,12 +42,18 @@ namespace AirplanePhysics.AirplaneInputs
         public float Pitch {  get { return f_pitch; } }
         public float Roll { get { return f_roll; } }
         public float Yaw { get { return f_yaw; } }
-        public float Throttle { get { return f_throttle; } }
+        public float Throttle { get { return f_throttle; } set { f_throttle = value; } }
         public int Flaps { get { return i_flaps; } }
         public float FlapsNormalized { get { return (i_flaps / (float)i_maxFlapsIncrements); } 
         }
         public float Brake { get { return f_brake; } }
         public bool CameraSwitch { get { return b_cameraSwitch; } set { b_cameraSwitch = value; } }
+        public bool EngineOn { get { return b_engineON; } set { b_engineON = value; } }
+        #endregion
+
+        #region EVENTS
+        public UnityEvent OnEngineStartup = new UnityEvent();
+        public UnityEvent OnEngineShutdown = new UnityEvent();
         #endregion
 
         #region UNITY BUILT-IN METHODS
@@ -121,8 +128,6 @@ namespace AirplanePhysics.AirplaneInputs
             f_roll = Mathf.Clamp(f_roll,-1.0f,1.0f);
         }
 
-
-
         protected virtual void HandlePitchYaw()
         {
             bool usingGamepad = _playerInput.currentControlScheme.Equals(_airplaneActions.Airplane_GamepadScheme.name) ? true : false;
@@ -178,7 +183,19 @@ namespace AirplanePhysics.AirplaneInputs
         {
             b_cameraSwitch = true;
         }
+        private void HandleEngineStartup(InputAction.CallbackContext context)
+        {
+            b_engineON = !b_engineON;
 
+            if (b_engineON && OnEngineStartup != null) 
+            {
+                OnEngineStartup.Invoke();
+            }
+            else if(!b_engineON && OnEngineShutdown != null)
+            {
+                OnEngineShutdown.Invoke();
+            }
+        }
 
         private void SubscribeInputEvents()
         {
@@ -188,6 +205,9 @@ namespace AirplanePhysics.AirplaneInputs
 
             //Camera switch
             _airplaneActions.AirplaneControls.CameraSwitch.performed += HandleCameraSwitch;
+
+            //Engine Toogle
+            _airplaneActions.AirplaneControls.MotorToggle.performed += HandleEngineStartup;
 
         }
 

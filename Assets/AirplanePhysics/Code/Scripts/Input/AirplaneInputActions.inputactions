@@ -76,6 +76,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "MotorToggle",
+                    "type": "Button",
+                    "id": "de7cfc6e-b746-407d-be61-c73ec221b675",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -296,6 +305,28 @@
                     "processors": "InvertVector2(invertX=false)",
                     "groups": ";Airplane_Gamepad",
                     "action": "PitchYawController",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "74209719-da90-4039-a5d1-c818029d948b",
+                    "path": "<Keyboard>/r",
+                    "interactions": "Hold(duration=0.8,pressPoint=0.5)",
+                    "processors": "",
+                    "groups": ";Airplane_Keyboard",
+                    "action": "MotorToggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "73fd5015-863d-4cd4-a624-3432f8378474",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "Hold(duration=0.8,pressPoint=0.5)",
+                    "processors": "",
+                    "groups": ";Airplane_Gamepad",
+                    "action": "MotorToggle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

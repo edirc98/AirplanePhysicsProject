@@ -10,6 +10,7 @@ namespace AirplanePhysics.Component
         #region VARIABLES
         [Header("Engine Properties")]
         public float maxForce = 200.0f;
+        public float idleRPM = 120.0f;
         public float maxRPM = 2550.0f;
 
         [Header("Engine Power Curve")]
@@ -24,7 +25,7 @@ namespace AirplanePhysics.Component
         #endregion
 
         #region PROPERTIES
-        public float RPMs { get { return _currentRPMs; } }
+        public float RPMs { get { return _currentRPMs; } set { _currentRPMs = value; } }
 
         #endregion
 
@@ -47,7 +48,7 @@ namespace AirplanePhysics.Component
             throttleValue = powerCurve.Evaluate(throttleValue);
 
             //RPMs compuitation && Propeller
-            _currentRPMs = throttleValue * maxRPM;
+            _currentRPMs = (throttleValue * maxRPM) + idleRPM;
             if(propeller != null) { propeller.HandlePropeller(_currentRPMs); }
 
             //Fuel Handling

@@ -9,7 +9,7 @@ namespace AirplanePhysics.Component
         #region VARIABLES
         [Header("Propeller Properties")]
         public float minRPMs = 100.0f;
-        public float minRPMsToSwap = 300.0f;
+        public float minRPMsToSwap = 350.0f;
         public float minRPMsToTextureSwap = 1500.0f;
 
         [Header("Propeller Objects")]
@@ -86,6 +86,21 @@ namespace AirplanePhysics.Component
             foreach(GameObject prop in propellerBlurredObjects)
             {
                 prop.SetActive(active);
+            }
+        }
+
+        public void StopPropeller()
+        {
+            foreach (GameObject prop in propellerBlurredObjects)
+            {
+                if(prop.activeSelf == true)
+                {
+                    prop.SetActive(false);
+                }
+                if (propellerObejct.activeSelf == false)
+                {
+                    propellerObejct.SetActive(true);
+                }
             }
         }
 

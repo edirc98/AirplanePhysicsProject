@@ -6532,6 +6532,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 23af4dc21a87ce8468ce0caf843badbd, type: 3}
+    - target: {fileID: 3325692253672568487, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3407196943442558023, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_LocalPosition.y
       value: 4.21
@@ -6582,7 +6586,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4490954691494226875, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_Volume
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4490954691494226875, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: m_Resource
@@ -6592,6 +6596,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 00ce172d333d2944796d39e7e46b8be0, type: 3}
+    - target: {fileID: 4490954691494226875, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4692184242189659254, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
       propertyPath: input
       value: 
@@ -6842,10 +6850,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   i_maxFlapsIncrements: 2
-  k_BrakeKey: 32
   ThrottleSensitivity: 0.01
   RollSensitivity: 0.2
   RollBackSensitivity: 0.2
+  OnEngineStartup:
+    m_PersistentCalls:
+      m_Calls: []
+  OnEngineShutdown:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &9103217766581598517 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5275941356147924954, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}

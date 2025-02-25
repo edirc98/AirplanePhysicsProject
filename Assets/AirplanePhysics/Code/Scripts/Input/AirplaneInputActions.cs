@@ -98,6 +98,15 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MotorToggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""de7cfc6e-b746-407d-be61-c73ec221b675"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -320,6 +329,28 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""PitchYawController"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""74209719-da90-4039-a5d1-c818029d948b"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": ""Hold(duration=0.8,pressPoint=0.5)"",
+                    ""processors"": """",
+                    ""groups"": "";Airplane_Keyboard"",
+                    ""action"": ""MotorToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""73fd5015-863d-4cd4-a624-3432f8378474"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": ""Hold(duration=0.8,pressPoint=0.5)"",
+                    ""processors"": """",
+                    ""groups"": "";Airplane_Gamepad"",
+                    ""action"": ""MotorToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -364,6 +395,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
         m_AirplaneControls_CameraSwitch = m_AirplaneControls.FindAction("CameraSwitch", throwIfNotFound: true);
         m_AirplaneControls_PitchYawMouse = m_AirplaneControls.FindAction("PitchYawMouse", throwIfNotFound: true);
         m_AirplaneControls_PitchYawController = m_AirplaneControls.FindAction("PitchYawController", throwIfNotFound: true);
+        m_AirplaneControls_MotorToggle = m_AirplaneControls.FindAction("MotorToggle", throwIfNotFound: true);
     }
 
     ~@AirplaneInputActions()
@@ -438,6 +470,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_AirplaneControls_CameraSwitch;
     private readonly InputAction m_AirplaneControls_PitchYawMouse;
     private readonly InputAction m_AirplaneControls_PitchYawController;
+    private readonly InputAction m_AirplaneControls_MotorToggle;
     public struct AirplaneControlsActions
     {
         private @AirplaneInputActions m_Wrapper;
@@ -450,6 +483,7 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
         public InputAction @CameraSwitch => m_Wrapper.m_AirplaneControls_CameraSwitch;
         public InputAction @PitchYawMouse => m_Wrapper.m_AirplaneControls_PitchYawMouse;
         public InputAction @PitchYawController => m_Wrapper.m_AirplaneControls_PitchYawController;
+        public InputAction @MotorToggle => m_Wrapper.m_AirplaneControls_MotorToggle;
         public InputActionMap Get() { return m_Wrapper.m_AirplaneControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -483,6 +517,9 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
             @PitchYawController.started += instance.OnPitchYawController;
             @PitchYawController.performed += instance.OnPitchYawController;
             @PitchYawController.canceled += instance.OnPitchYawController;
+            @MotorToggle.started += instance.OnMotorToggle;
+            @MotorToggle.performed += instance.OnMotorToggle;
+            @MotorToggle.canceled += instance.OnMotorToggle;
         }
 
         private void UnregisterCallbacks(IAirplaneControlsActions instance)
@@ -511,6 +548,9 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
             @PitchYawController.started -= instance.OnPitchYawController;
             @PitchYawController.performed -= instance.OnPitchYawController;
             @PitchYawController.canceled -= instance.OnPitchYawController;
+            @MotorToggle.started -= instance.OnMotorToggle;
+            @MotorToggle.performed -= instance.OnMotorToggle;
+            @MotorToggle.canceled -= instance.OnMotorToggle;
         }
 
         public void RemoveCallbacks(IAirplaneControlsActions instance)
@@ -556,5 +596,6 @@ public partial class @AirplaneInputActions: IInputActionCollection2, IDisposable
         void OnCameraSwitch(InputAction.CallbackContext context);
         void OnPitchYawMouse(InputAction.CallbackContext context);
         void OnPitchYawController(InputAction.CallbackContext context);
+        void OnMotorToggle(InputAction.CallbackContext context);
     }
 }

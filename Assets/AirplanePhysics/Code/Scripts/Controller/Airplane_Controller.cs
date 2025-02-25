@@ -112,6 +112,8 @@ namespace AirplanePhysics
 
             //Check if the plane is grounded
             InvokeRepeating("CkeckPlaneState", 2.0f, 1.5f);
+
+            input.OnEngineShutdown.AddListener(HandleEngineShutdown);
         }
 
         
@@ -131,12 +133,15 @@ namespace AirplanePhysics
         }
         private void HandleEngines()
         {
-            if(airplane_Engines != null && airplane_Engines.Count > 0)
+            if (input.EngineOn)
             {
-                foreach (Airplane_Engine engine in airplane_Engines)
+                if (airplane_Engines != null && airplane_Engines.Count > 0)
                 {
-                    //Engine force computation
-                    _rb.AddForce( engine.ComputeForce(input.Throttle));
+                    foreach (Airplane_Engine engine in airplane_Engines)
+                    {
+                        //Engine force computation
+                        _rb.AddForce(engine.ComputeForce(input.Throttle));
+                    }
                 }
             }
         }
@@ -204,7 +209,6 @@ namespace AirplanePhysics
                 }
             }
         }
-
         private void CkeckPlaneState()
         {
             if (airplane_Wheels.Count > 0) 
@@ -252,6 +256,21 @@ namespace AirplanePhysics
                     _airplaneState = AIRPLANE_STATE.FLYING;
                 }
             }
+        }
+
+        private void HandleEngineShutdown()
+        {
+           //RPMs back to 0
+            if (airplane_Engines != null && airplane_Engines.Count > 0)
+            {
+                foreach (Airplane_Engine engine in airplane_Engines)
+                {
+                    engine.RPMs = 0.0f;
+                    engine.propeller.StopPropeller();
+                }
+            }
+            //throttle back to 0
+            input.Throttle = 0.0f; 
         }
         #endregion
     }
