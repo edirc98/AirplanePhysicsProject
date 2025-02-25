@@ -5326,6 +5326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1382911129}
+  - component: {fileID: 1382911130}
   m_Layer: 0
   m_Name: Tracks_Panel
   m_TagString: Untagged
@@ -5350,9 +5351,26 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -350, y: 0}
   m_SizeDelta: {x: 350, y: 400}
   m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &1382911130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382911128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6df46b20c1b82439c0af06d60c5532, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transitionDuration: 1
+  showEaseType: 3
+  hideEaseType: 2
+  hidePos: {x: 0, y: 0, z: 0}
+  showPos: {x: 0, y: 0, z: 0}
 --- !u!114 &1408560505 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8583872240564172851, guid: 8206ea8f20bceea48b7063452d8abb56, type: 3}
