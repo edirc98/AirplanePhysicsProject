@@ -14,6 +14,9 @@ public class Track : MonoBehaviour
     [Header("Track Events")]
     public UnityEvent OnCompletedTrack = new UnityEvent();
 
+    private bool _trackStarted = false;
+    public bool TrackStarted { get { return _trackStarted; } set { _trackStarted = value; } }
+
     private int _currentGateID;
     public int CurrentGateID {  get { return _currentGateID; } }
 
@@ -38,12 +41,14 @@ public class Track : MonoBehaviour
         FindGates();
         InitGates();
         _currentGateID = 0;
-        StartTrack();
     }
 
     private void Update()
     {
-        UpdateTrackStats();
+        if (_trackStarted)
+        {
+            UpdateTrackStats();
+        }
     }
 
     private void OnDrawGizmos()
@@ -97,6 +102,7 @@ public class Track : MonoBehaviour
             _startTime = Time.time;
             _currentScore = 0;
             Gates[_currentGateID].ActivateGate();
+            _trackStarted = true; 
         }
     }
     private void SelectNextGate(float distPercent)
@@ -113,6 +119,7 @@ public class Track : MonoBehaviour
             if(OnCompletedTrack != null)
             {
                 OnCompletedTrack.Invoke();
+                _trackStarted = false;
             }
             return;
         }
