@@ -4,11 +4,13 @@ using System.Linq;
 using System;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
+using AirplanePhysics;
 
 public class Track : MonoBehaviour
 {
     #region VARIABLES
     [Header("Track Variables")]
+    public Track_Data trackData;
     public List<Gate> Gates = new List<Gate>();
 
     [Header("Track Events")]
@@ -131,6 +133,15 @@ public class Track : MonoBehaviour
         _currentTime = (int)(Time.time - _startTime);
         _currentMins = (_currentTime / 60);
         _currentSecs = (_currentTime -(_currentMins * 60));
+    }
+
+    public void SaveTrackData()
+    {
+        if (trackData != null) 
+        {
+            trackData.SetTimes(_currentTime);
+            trackData.SetScores(_currentScore);
+        }
     }
     #endregion
 }

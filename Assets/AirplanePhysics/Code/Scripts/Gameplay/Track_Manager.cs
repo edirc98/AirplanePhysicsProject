@@ -109,23 +109,30 @@ public class Track_Manager : MonoBehaviour
         {
             if (_currentTrack != null)
             {
-                Debug.Log("Deactivating " + _currentTrack.name + ".");
-                _currentTrack.gameObject.SetActive(false);
-                _currentTrack = null;
+                DeactivateCurrentTrack();
             }
-
-            Debug.Log("New track ID " + trackId);
 
             if (id >= 0 && id < Tracks.Count)
             {
-                _currentTrack = Tracks[id];
-                _currentTrack.gameObject.SetActive(true);
+                ActivateTrack(id);
             }
         };
         if (!statsPanel.activeSelf) 
         {
             statsPanel.SetActive(true);
         }
+    }
+
+    private void ActivateTrack(int id)
+    {
+        _currentTrack = Tracks[id];
+        _currentTrack.gameObject.SetActive(true);
+    }
+
+    private void DeactivateCurrentTrack()
+    {
+        _currentTrack.gameObject.SetActive(false);
+        _currentTrack = null;
     }
 
     public void StartTrack()
@@ -136,9 +143,11 @@ public class Track_Manager : MonoBehaviour
     private void CompletedTrack()
     {
         Debug.Log("Track Manager: Track Completed");
-        if (currentAirplane != null)
+        if (currentAirplane != null && _currentTrack != null)
         {
             StartCoroutine(WaitForLanding());
+            _currentTrack.SaveTrackData();
+            DeactivateCurrentTrack();
         }
     }
 

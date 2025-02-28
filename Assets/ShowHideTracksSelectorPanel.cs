@@ -29,7 +29,7 @@ public class ShowHideTracksSelectorPanel : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab)) { ChangePanelState(); }
     }
 
-    private void ChangePanelState()
+    public void ChangePanelState()
     {
         switch (state) 
         {
