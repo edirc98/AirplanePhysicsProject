@@ -2785,6 +2785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxForce: 200
+  idleRPM: 120
   maxRPM: 2550
   powerCurve:
     serializedVersion: 2
