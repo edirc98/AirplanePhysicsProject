@@ -7,34 +7,42 @@ namespace AirplanePhysics
     public class Track_Data : ScriptableObject
     {
         #region VARIABLES
-        public float lastTrackTime;
-        public float bestTrackTime;
-        public float lastTrackScore;
-        public float bestTrackScore; 
+        private float _lastTrackTime;
+        private float _bestTrackTime;
+        private float _lastTrackScore;
+        private float _bestTrackScore;
+        #endregion
+
+        #region PROPERTIES
+        public float LastTrackTime { get { return _lastTrackTime; } }
+        public float BestTrackTime { get { return _bestTrackTime; } }
+        public float LastTrackScore { get { return _lastTrackScore; } }
+        public float BestTrackScore { get { return _bestTrackScore; } }
+
         #endregion
 
         #region CUSTOM METHODS
 
         public void SetTimes(float atime)
         {
-            lastTrackTime = atime;
-            if (bestTrackTime == 0)
+            _lastTrackTime = atime;
+            if (_bestTrackTime == 0)
             {
-                bestTrackTime = lastTrackTime;
+                _bestTrackTime = _lastTrackTime;
             }
-            else if (lastTrackTime < bestTrackTime) 
+            else if (_lastTrackTime < _bestTrackTime) 
             {
-                bestTrackTime = lastTrackTime;
+                _bestTrackTime = _lastTrackTime;
             }
         }
 
         public void SetScores(float aScore)
         {
-            lastTrackScore = aScore;
+            _lastTrackScore = aScore;
 
-            if (lastTrackScore > bestTrackScore) 
+            if (_lastTrackScore > _bestTrackScore) 
             {
-                bestTrackScore = lastTrackScore;
+                _bestTrackScore = _lastTrackScore;
             }
         }
 

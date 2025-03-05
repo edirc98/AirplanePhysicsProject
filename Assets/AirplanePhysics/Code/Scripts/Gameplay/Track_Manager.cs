@@ -28,30 +28,33 @@ public class Track_Manager : MonoBehaviour
     public GameObject statsPanel; 
     public TMP_Text gateText;
     public TMP_Text timeText;
-    public TMP_Text scoreText; 
+    public TMP_Text scoreText;
+
+    [Header("Stats Panel Animation")]
+    public float showPos = 50.0f;
+    public float hidePos = -50.0f;
+    public float transitionDuration = 1.0f;
+    [SerializeField] private LeanTweenType EaseType;
+
 
     [Header("Track Manager Events")]
     public UnityEvent OnCompletedRace = new UnityEvent();
 
     public Airplane_Controller currentAirplane;
 
-    private Track _currentTrack; 
+    private Track _currentTrack;
     #endregion
 
     #region UNITY BUILT-IN METHODS
+
     private void Awake()
     {
-
     }
     void Start()
     {
-        //currentAirplane = GameObject.FindGameObjectWithTag("Player").GetComponent<Airplane_Controller>();
-
         FindTracks();
         InitTracks();
         GenerateTracksSelectors();
-
-        //StartTrack(1);
     }
 
     void Update()
@@ -117,10 +120,7 @@ public class Track_Manager : MonoBehaviour
                 ActivateTrack(id);
             }
         };
-        if (!statsPanel.activeSelf) 
-        {
-            statsPanel.SetActive(true);
-        }
+        ShowStatsPanel();
     }
 
     private void ActivateTrack(int id)
@@ -162,9 +162,19 @@ public class Track_Manager : MonoBehaviour
         {
             Debug.Log("Landed Succesfull. Race Completed");
             OnCompletedRace.Invoke();
+            HideStatsPanel();
         }
     }
 
+
+    private void ShowStatsPanel()
+    {
+        LeanTween.moveLocalY(statsPanel, showPos, transitionDuration).setEase(EaseType);
+    }
+    private void HideStatsPanel()
+    {
+        LeanTween.moveLocalY(statsPanel, hidePos, transitionDuration).setEase(EaseType);
+    }
     private void UpdateTrackUI()
     {
         if(gateText != null)
