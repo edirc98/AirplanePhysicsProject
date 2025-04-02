@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -41,6 +42,7 @@ public class RocketRack : MonoBehaviour
         {
             ShootRackRocket();
         }
+        ReloadRockets();
     }
     #endregion
 
@@ -70,6 +72,29 @@ public class RocketRack : MonoBehaviour
                 return;
             }
         }
+    }
+
+    private void ReloadRockets()
+    {
+        foreach(AttachPoint rackPoint in _rackAttachPoints)
+        {
+            if(rackPoint.Rocket.Status == Rocket.RocketStatus.RELOADING && rackPoint.Rocket.IsReloading == false)
+            {
+                rackPoint.Rocket.IsReloading = true;
+                rackPoint.Rocket.transform.position = rackPoint.Point.position;
+                rackPoint.Rocket.transform.up = -rackPoint.Point.forward;
+                StartCoroutine(Reload(rackPoint.Rocket));
+            }
+        }
+    }
+
+
+    private IEnumerator Reload(Rocket rocket)
+    {
+        yield return new WaitForSeconds(rocket.ReloadTime);
+        rocket.Status = Rocket.RocketStatus.READY;
+        rocket.IsReloading = false;
+        rocket.gameObject.SetActive(true);
     }
     #endregion
 
