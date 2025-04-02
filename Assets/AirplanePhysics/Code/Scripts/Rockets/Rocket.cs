@@ -14,13 +14,14 @@ public class Rocket : MonoBehaviour
     [SerializeField] private ParticleSystem ps_Flame;
     [SerializeField] private ParticleSystem ps_Trail;
 
-    public enum RocketState
+    public enum RocketStatus
     {
-        HOLDED, 
-        SHOT
+        READY, 
+        ONAIR,
+        RELOADING
     }
-    private RocketState state = RocketState.HOLDED; 
-    public RocketState CurrentRocketState { get { return state; } }
+    [SerializeField] private RocketStatus state = RocketStatus.READY;
+    public RocketStatus Status { get { return state; } }
     #endregion
     #region UNITY BUILT-IN METHODS
     private void Awake()
@@ -28,27 +29,14 @@ public class Rocket : MonoBehaviour
         _rb = GetComponent<Rigidbody>(); 
 
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ShotRocket(); 
-        }
-    }
     #endregion
     #region CUSTOM METHODS
     public void ShotRocket()
     {
         _rb.linearVelocity = -transform.up * _speed;
 
-        state = RocketState.SHOT;
+        state = RocketStatus.ONAIR;
         ps_Flame.Play();
         ps_Trail.Play();
     }
